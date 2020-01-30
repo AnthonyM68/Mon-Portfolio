@@ -1,0 +1,12 @@
+{
+    "name": "my-app/mailer",
+    "authors": [
+        {
+            "name": "jad67tony",
+            "email": "anthony.montmirail@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
