@@ -8,8 +8,9 @@ if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
     $pass = "4Wflo7tNwAG41A==";
 
 } else if ($_SERVER['SERVER_NAME'] === "localhost") {
+
     $host = "localhost";
-    $dbname = "mvc_sanspoo;charset=utf8";
+    $dbname = "anthonym_portfolio;charset=utf8";
     $user = "root";
     $pass = "";
 }

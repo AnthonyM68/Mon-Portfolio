@@ -3,19 +3,24 @@ import axios from 'axios'
 
 export default class Projects extends Component {
 	constructor(props) {
-        super(props);
-        this.state = {
-			
-			count: 1
-			
-        }
-    }
+		super(props);
+		this.state = {
+
+			count: 0
+
+		}
+	}
 
 	handleClick = (e) => {
-		this.setState({count: this.state.count + 1 })
-    	console.log(this.state)
- 
-		e.preventDefault();
+		this.setState({ count: this.state.count + 1 })
+		console.log(this.state);
+		console.log(e.target.id);
+		
+
+	
+
+
+		//e.preventDefault();
 
 		axios({
 			method: "POST",
@@ -58,7 +63,7 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/Bomberman%20v2/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/Bomberman%20v2/" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a onClick={(e) => this.handleClick(e)}><i className="icon-heart" /></a></span>
+												<span><a  onClick={this.handleClick}><i id="bomberman" className="icon-heart" /></a></span>
 											</p>
 										</div>
 									</div>
