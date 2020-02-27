@@ -5,22 +5,21 @@ export default class Projects extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			count: null,
+			id: null
+			
 
-			count: 0
 
 		}
 	}
 
 	handleClick = (e) => {
-		this.setState({ count: this.state.count + 1 })
-		console.log(this.state);
-		console.log(e.target.id);
+		this.setState({ count: this.state.count = 1 })
+		e.preventDefault();
+		//console.log(e.target.id);
+		this.state.id = e.target.id;
+		//console.log(this.state);
 		
-
-	
-
-
-		//e.preventDefault();
 
 		axios({
 			method: "POST",

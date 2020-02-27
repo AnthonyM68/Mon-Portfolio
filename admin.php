@@ -9,10 +9,16 @@ $pdo = new PDO('mysql:host=' . $host . ';dbname=' . $dbname, $user, $pass, $opti
 
 
 function recupere()
-   {  
-      global $pdo;
-      $req = $pdo->prepare("SELECT * FROM mylikes");
-      $req->execute();
-      return $req->fetch();
-   }
-   
+{
+   global $pdo;
+   $req = $pdo->prepare('SELECT * FROM mylikes');
+   $req->execute();
+   return $req->fetch();
+}
+function ajoute($result)
+{
+   global $pdo;
+   $req = $pdo->prepare('UPDATE mylikes SET bomberman=?');
+   $req->execute([$result]);
+   return $req->fetch();
+}

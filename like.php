@@ -7,15 +7,24 @@ header("Content-Type: application/json");
 require('config.php');
 require('admin.php');
 
-if(isset($_POST)){
+$rest_json = file_get_contents("php://input");
+$datas = json_decode($rest_json, true);
+
+
+if (isset($_POST)) {
+    
     $result = recupere();
+    $result = $result['bomberman'] + $datas['count'];
+ 
+    $result = ajoute($result);
 
-    ?>
-        {
-        "status": "success",
-        "message": "Vos données ont bien étaient transmis",
-        "data":<?php echo json_encode($result) ?>
-        }
-    <?php
+
+?>
+    {
+    "status": "success",
+    "message": "Vos données ont bien étaient transmis",
+    "data":<?php echo json_encode($result) ?>,
+    "datas":<?php echo json_encode($datas['count']) ?>
+    }
+<?php
 }
-
