@@ -21,7 +21,8 @@ export default class Contact extends Component {
 
         axios({
             method: "POST",
-            url: "http://localhost/mon-app/mail.php",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
+            url: "http://localhost/MonPortfolio/mail.php",
             //url: "http://logic-68consolessystem.fr/mail.php",
             data: this.state,
             headers: {
@@ -29,13 +30,13 @@ export default class Contact extends Component {
                 
             }
         }).then((response) => {
-            console.log(response);
+            console.log(response.data);
             
             if (response.data.status === 'success') {
-                alert("Message Envoyé.");
+
                 this.resetForm()
             } else if (response.data.status === 'fail') {
-                alert("L'envoie du message a échoué")
+
             }
         }).catch(error => {
             console.log(error);

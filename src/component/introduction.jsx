@@ -15,7 +15,7 @@ export default class Introduction extends Component {
                       <div className="slider-text-inner js-fullheight">
                         <div className="desc">
                           <h1>Bonjour je suis  <br />Anthony</h1>
-                          <p><a className="btn btn-primary btn-learn" href="https://logic-68consolessystem.fr/cv" target="_blank" rel="noopener noreferrer">Mon CV<i className="icon-download4" /></a></p>
+                          <p><a className="btn btn-primary btn-learn" href="images/cv/cv.pdf" target="_blank" rel="noopener noreferrer">Mon CV<i className="icon-download4" /></a></p>
                         </div>
                       </div>
                     </div>

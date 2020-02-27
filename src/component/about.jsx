@@ -26,7 +26,7 @@ export default class About extends Component {
                         <div className="row">
                             <div className="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
                                 <span className="heading-meta">Ce que je fais?</span>
-                                <h2 className="colorlib-heading">HTML, CSS, React JSX, Js, C++, Python</h2>
+                                <h2 className="colorlib-heading">HTML, CSS, Bootstrap, JavaScript, JQuery, PHP, SQL MySQL, React JS, WordPress, C++, Python</h2>
                             </div>
                         </div>
                         <div className="row row-pt-md">
@@ -40,7 +40,8 @@ export default class About extends Component {
                                         <p></p>
                                     </div>
                                 </div>
-                            </div>                 
+                            </div>    
+
                             <div className="col-md-4 text-center animate-box">
                                 <div className="services color-2">
                                     <span className="icon">
@@ -52,6 +53,7 @@ export default class About extends Component {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </section>

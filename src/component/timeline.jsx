@@ -22,6 +22,7 @@ export default class Timeline extends Component {
                       </div>
                       <div className="timeline-label">
                         <h2>Access Code School <span>2019-present</span></h2>
+                        <span>Titre Professionnel Développeur Web / Web Mobile niveau 5 (bac+2)</span>
                         <p></p>
                       </div>
                     </div>
@@ -32,7 +33,8 @@ export default class Timeline extends Component {
                         <i className="icon-pen2" />
                       </div>
                       <div className="timeline-label">
-                        <h2>Auto-Entrepreneur<span>2015-2019</span></h2>
+                        <h2>Auto-Entrepreneur <span>2015-2019</span></h2>
+                        <span>Réparation reprise soudure Processeur, RAM, Southbridge, flash...etc</span>
                         <p></p>
                       </div>
                     </div>
@@ -44,6 +46,7 @@ export default class Timeline extends Component {
                       </div>
                       <div className="timeline-label">
                         <h2>Salarié dans le Transports Routier <span>1996-2015</span></h2>
+                        <span>Conducteur International Super-poids lourd</span>
                         <p></p> 
                       </div>
                     </div>
