@@ -23,23 +23,23 @@ export default class Contact extends Component {
             method: "POST",
             //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
             url: "http://localhost/MonPortfolio/mail.php",
-            //url: "http://logic-68consolessystem.fr/mail.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
-                
             }
         }).then((response) => {
-            console.log(response.data);
-            
+            console.log(response.data.error);
             if (response.data.status === 'success') {
 
                 this.resetForm()
             } else if (response.data.status === 'fail') {
-
+                let el = []
+                response.data.error.forEach(element => 
+                    document.getElementById(element).value = 'erreur'
+                );
             }
         }).catch(error => {
-            console.log(error);
+            //console.log(error);
         })
     }
     render() {
@@ -58,8 +58,13 @@ export default class Contact extends Component {
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
                                     <input type="email" className="form-control" id="inputEmail" placeholder="Email"
+
                                         value={this.state.inputEmail}
                                         onChange={e => this.setState({ inputEmail: e.target.value })} />
+
+
+
+
                                 </div>
                                 <div className="form-group col-md-3">
                                     <label>Nom</label>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import debounce from 'lodash/debounce'
 import axios from 'axios'
 
 export default class Projects extends Component {
@@ -8,8 +7,6 @@ export default class Projects extends Component {
 		this.state = {
 			count: 0,
 			id: null, 
-			
-
 		}
 		this.likes = {
 			projects: []
@@ -27,28 +24,31 @@ export default class Projects extends Component {
 
 	handleClick = (e) => {
 		e.preventDefault();
+
 		this.setState({ count: this.state.count = 1 });
-		if(e.target.id == undefined ){
-			this.state.id = 'search_likes';
+		if(e.target.id === undefined ){
+			//this.state.id = 'search_likes';
+			this.setState({ id: this.state.id = 'search_likes' });
 		} else {
-			this.state.id = e.target.id;
+			this.setState({ id: this.state.id = e.target.id });
+			//this.state.id = e.target.id;
 		}
 		axios({
 			method: "POST",
-			url: "http://localhost/MonPortfolio/like.php",
+			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+			//url: "http://localhost/MonPortfolio/like.php",
 			data:this.state,
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		}).then((response) => {
-			if (response.data.status == 'success') {
+			if (response.data.status === 'success') {
 				let tab = response.data.datas;
-				for(let i = 0; i < tab.length; i++){	
+				for(let i = 0; i < tab.length; i++){		
 					this.setState( {[i]: this.likes.projects[i] = tab[i]['likes']});
 				}
-				
-			} else if (response.data.status == 'fail') {
-
+			} else if (response.data.status === 'fail') {
+				;
 			}
 		}).catch(error => {
 
@@ -121,7 +121,7 @@ export default class Projects extends Component {
 												<span><a href="https://anthonym.promo-36.codeur.online/Allo_jati/" target="_blank"><i className="icon-eye" /></a></span>
 												<span>
 													<a onClick={this.handleClick}>
-														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[2]}
+														<i id="allo_jati"  className="icon-heart" />{this.likes.projects[2]}
 													</a>
 												</span>
 											</p>
@@ -139,7 +139,7 @@ export default class Projects extends Component {
 												<span><a href="https://anthonym.promo-36.codeur.online/IntegrationACS/" target="_blank"><i className="icon-eye" /></a></span>
 												<span>
 													<a onClick={this.handleClick}>
-														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[3]}
+														<i id="age_converter"  className="icon-heart" />{this.likes.projects[3]}
 													</a>
 												</span>
 											</p>
@@ -157,7 +157,7 @@ export default class Projects extends Component {
 												<span><a href="https://anthonym.promo-36.codeur.online/IntegrationBlueasy/" target="_blank"><i className="icon-eye" /></a></span>
 												<span>
 													<a onClick={this.handleClick}>
-														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[4]}
+														<i id="integration_acs"  className="icon-heart" />{this.likes.projects[4]}
 													</a>
 												</span>
 											</p>
@@ -176,7 +176,7 @@ export default class Projects extends Component {
 												<span><a href="https://anthonym.promo-36.codeur.online/AgeConverter" target="_blank"><i className="icon-eye" /></a></span>
 												<span>
 													<a onClick={this.handleClick}>
-														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[5]}
+														<i id="integration_blueasy"  className="icon-heart" />{this.likes.projects[5]}
 													</a>
 												</span>
 											</p>
