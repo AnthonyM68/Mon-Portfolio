@@ -1,38 +1,53 @@
 import React, { Component } from 'react'
+import debounce from 'lodash/debounce'
 import axios from 'axios'
 
 export default class Projects extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			count: null,
-			id: null
+			count: 0,
+			id: null, 
 			
 
-
 		}
+		this.likes = {
+			projects: []
+		}
+		this.handleLoad = this.handleLoad.bind(this);
+
+	}
+	componentDidMount() {
+		window.addEventListener('load', this.handleLoad);
+	}
+
+	handleLoad = (e) => {
+		this.handleClick(e);	
 	}
 
 	handleClick = (e) => {
-		this.setState({ count: this.state.count = 1 })
 		e.preventDefault();
-		//console.log(e.target.id);
-		this.state.id = e.target.id;
-		//console.log(this.state);
-		
-
+		this.setState({ count: this.state.count = 1 });
+		if(e.target.id == undefined ){
+			this.state.id = 'search_likes';
+		} else {
+			this.state.id = e.target.id;
+		}
 		axios({
 			method: "POST",
 			url: "http://localhost/MonPortfolio/like.php",
-			data: this.state,
+			data:this.state,
 			headers: {
 				'Content-Type': 'application/json'
-
 			}
 		}).then((response) => {
-			if (response.data.status === 'success') {
-				console.log(response.data);
-			} else if (response.data.status === 'fail') {
+			if (response.data.status == 'success') {
+				let tab = response.data.datas;
+				for(let i = 0; i < tab.length; i++){	
+					this.setState( {[i]: this.likes.projects[i] = tab[i]['likes']});
+				}
+				
+			} else if (response.data.status == 'fail') {
 
 			}
 		}).catch(error => {
@@ -62,7 +77,14 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/Bomberman%20v2/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/Bomberman%20v2/" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a  onClick={this.handleClick}><i id="bomberman" className="icon-heart" /></a></span>
+
+
+												<span>
+													<a onClick={this.handleClick}>
+														<i id="bomberman" className="icon-heart"/>{this.likes.projects[0]}
+													</a>
+												</span>
+
 											</p>
 										</div>
 									</div>
@@ -78,7 +100,11 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/Yes_Transfert/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/Yes_Transfert/" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a href="#"><i className="icon-heart" /></a></span>
+												<span>
+													<a onClick={this.handleClick}>
+														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[1]}
+													</a>
+												</span>
 											</p>
 										</div>
 									</div>
@@ -93,7 +119,11 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/Allo_jati/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/Allo_jati/" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a href="#"><i className="icon-heart" /></a></span>
+												<span>
+													<a onClick={this.handleClick}>
+														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[2]}
+													</a>
+												</span>
 											</p>
 										</div>
 									</div>
@@ -107,7 +137,11 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/IntegrationACS/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/IntegrationACS/" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a href="#"><i className="icon-heart" /></a></span>
+												<span>
+													<a onClick={this.handleClick}>
+														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[3]}
+													</a>
+												</span>
 											</p>
 										</div>
 									</div>
@@ -121,7 +155,11 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/IntegrationBlueasy/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/IntegrationBlueasy/" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a href="#"><i className="icon-heart" /></a></span>
+												<span>
+													<a onClick={this.handleClick}>
+														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[4]}
+													</a>
+												</span>
 											</p>
 										</div>
 									</div>
@@ -136,7 +174,11 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/AgeConverter" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/AgeConverter" target="_blank"><i className="icon-eye" /></a></span>
-												<span><a href="#"><i className="icon-heart" /></a></span>
+												<span>
+													<a onClick={this.handleClick}>
+														<i id="yestransfert"  className="icon-heart" />{this.likes.projects[5]}
+													</a>
+												</span>
 											</p>
 										</div>
 									</div>
@@ -148,5 +190,6 @@ export default class Projects extends Component {
 			</div>
 		)
 	}
+
 }
 /* <img src= {process.env.PUBLIC_URL + '/images/Bomberman.PNG'} className="project"></img> */

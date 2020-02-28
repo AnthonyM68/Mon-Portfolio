@@ -11,20 +11,26 @@ $rest_json = file_get_contents("php://input");
 $datas = json_decode($rest_json, true);
 
 
+
+
 if (isset($_POST)) {
     
-    $result = recupere();
-    $result = $result['bomberman'] + $datas['count'];
- 
-    $result = ajoute($result);
-
-
-?>
-    {
-    "status": "success",
-    "message": "Vos données ont bien étaient transmis",
-    "data":<?php echo json_encode($result) ?>,
-    "datas":<?php echo json_encode($datas['count']) ?>
+    if($datas['id'] == 'search_likes' ){
+        $likes = search_likes();
     }
-<?php
+    
+    $result = recupere($datas['id']);
+
+    $result = $result['likes'] + $datas['count'];
+ 
+    $resultat = ajoute($result, $datas['id']);
+
+
+    $tab = ['status' => 'success', 'message' => "Vos données ont bien étaient transmis", "datas" => $likes];
+    
+    echo json_encode($tab); 
+    
+    
+
 }
+/*"datas":<?php echo json_encode($datas['count']) ?>*/
