@@ -22,24 +22,24 @@ export default class Contact extends Component {
         axios({
             method: "POST",
             //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            url: "http://localhost/MonPortfolio/mail.php",
+            //url: "http://localhost/MonPortfolio/mail.php",
+            url: "http://localhost/portfolio_local/mail.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            console.log(response.data.error);
+            //console.log(response.data.error);
             if (response.data.status === 'success') {
-
+                console.log(response);
                 this.resetForm()
             } else if (response.data.status === 'fail') {
-                let el = []
                 response.data.error.forEach(element => 
                     document.getElementById(element).value = 'erreur'
                 );
             }
         }).catch(error => {
-            //console.log(error);
+            console.log(error);
         })
     }
     render() {

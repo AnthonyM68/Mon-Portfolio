@@ -35,8 +35,9 @@ export default class Projects extends Component {
 		}
 		axios({
 			method: "POST",
-			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-			//url: "http://localhost/MonPortfolio/like.php",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+			//url: "http://localhost/MonPortfolio/mail.php",
+			url: "http://localhost/portfolio_local/like.php",
 			data:this.state,
 			headers: {
 				'Content-Type': 'application/json'

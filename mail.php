@@ -11,8 +11,6 @@ $datas = json_decode($rest_json, true);
 
 $checkInfos = ['inputEmail', 'inputFirstName', 'inputLastName', 'inputAddress', 'inputCity', 'inputZip', 'inputPhone', 'message'];
 
-
-
 for ($i = 0; $i < count($checkInfos); $i++) {
 
     if (empty($datas[$checkInfos[$i]] )) {
@@ -21,158 +19,176 @@ for ($i = 0; $i < count($checkInfos); $i++) {
 }
 
 
-/*
 
-if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
+
+
+/*if ($_SERVER['SERVER_NAME'] === "localhost") {*/
+    $mail_dest = 'contact@logic-68consolessystem.fr';
+    $mail_exp = $datas['inputEmail'];
+    $subject = 'Demande de contact depuis Portfolio';
+    $headers = "From: Portfolio < $mail_exp > " . "\r\n" .
+    "Reply-To: $mail_exp" . "\r\n" .
+    "MIME-Version: 1.0\r\n" .
+    "Content-Type: text/html; charset=utf-8\r\n";
+
+    if(mail($mail_dest, $subject, 'corps', $headers)){
+        $send = true;
+    }
 
     //Envoyez l'e-mail
-    $headers = 'From: Contact Portfolio <contact@logic-68consolessystem.fr>' . "\r\n" .
+   /* $headers = "From: Yes Transfert < $inputEmail >" . "\r\n" .
         "Reply-To: $inputEmail" . "\r\n" .
         "MIME-Version: 1.0\r\n" .
         "Content-Type: text/html; charset=utf-8\r\n";
-
-    $to = 'contact@logic-68consolessystem.fr';
     $subject = 'Contact Porfolio';
-
+    $message = "test";*/
+    /*
     $message = "<html>
-    <head>
-      <title>$inputEmail prise de contact</title>
-    </head>
-    <body style=\"background-color:#fafafa;\">
-      <div style=\"padding:20px;\">
-      <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
+        <head>
+        <title>Prise de contact</title>
+        </head>
+        <body style=\"background-color:#fafafa;\">
+        <div style=\"padding:20px;\">
+        <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
 
 
-      
-      <table style=\"border:1px solid #000\">
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Nom : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Prénom : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Email : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
-      </tr>
-      </table>
-      <table style=\"border:1px solid #000\">
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Adresse : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Ville : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Code postal : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
-      </tr>
-      </table>
-      <br><br>
-      <table>
-      <tr>
-      <td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
-      </tr>
-      </table>
-    </body>
-    </html>";
+        
+        <table style=\"border:1px solid #000\">
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Nom : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Prénom : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Email : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
+        </tr>
+        </table>
+        <table style=\"border:1px solid #000\">
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Adresse : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Ville : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Code postal : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
+        </tr>
+        </table>
+        <br><br>
+        <table>
+        <tr>
+        <td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
+        </tr>
+        </table>
+        </body>
+        </html>";*/
 
 
-    if (mail($to, $subject, $message, $headers)) {
+    /*if(mail($inputEmail, $subject, $message, $headers)){
         $sent = true;
-    }
-    if (!empty($errors)) {
-        $tab = ['status' => 'error', 'type-error' => $errors];
-    }
-    if (isset($sent) && $sent === true) {
-        $tab = ['status' => 'success', 'message' => 'Vos données ont bien étaient transmis'];
-    }
-    echo json_encode($tab);
-}*/
-
-if (empty($error)) {
-    require_once('vendor/autoload.php');
-
-    $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
-        ->setUsername('10d8c72cde03e7')
-        ->setPassword('bb66424e01e210');
-
-
-    $mailer = new Swift_Mailer($transport);
-    $date = date('j, F Y h:i A');
-
-
-    $message = (new Swift_Message('bienvenue'))
-        ->setFrom(['contact@logic-consolessystem.fr' => 'logic-68consolessystem.fr'])
-        ->setTo(['demo@demo.fr'])
-        ->setBody("<html>
-    <head>
-      <title>Prise de contact</title>
-    </head>
-    <body style=\"background-color:#fafafa;\">
-      <div style=\"padding:20px;\">
-      <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
-
-
-      
-      <table style=\"border:1px solid #000\">
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Nom : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Prénom : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Email : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
-      </tr>
-      </table>
-      <table style=\"border:1px solid #000\">
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Adresse : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Ville : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
-      </tr>
-      <tr>
-      <td style=\"border:1px solid #000; width:100px\">Code postal : </td>
-      <td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
-      </tr>
-      </table>
-      <br><br>
-      <table>
-      <tr>
-      <td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
-      </tr>
-      </table>
-    </body>
-    </html>");
-
-    $type = $message->getHeaders()->get('Content-Type');
-    $type->setValue('text/html');
-    $type->setParameter('charset', 'utf-8');
-
-    //echo $type->toString();
-    $result = $mailer->send($message);
-
+        $tab3 = [$sent];
+        echo json_encode($tab3);
+    }*/
+ 
     if (!empty($errors)) {
         $tab2 = ['status' => 'fail', 'error' => $errors];
-    } else if (isset($sent) && $sent === true) {
+    }
+    else  {
+        $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis', 'send' => $send, 'expediteur' => $mail_exp];
+    }
+    echo json_encode($tab2);
+/*
+}
+
+/*
+if ($_SERVER['SERVER_NAME'] === "localhost") {
+
+    if (empty($error)) {
+        require_once('vendor/autoload.php');
+
+        $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
+            ->setUsername('10d8c72cde03e7')
+            ->setPassword('bb66424e01e210');
+
+
+        $mailer = new Swift_Mailer($transport);
+        $date = date('j, F Y h:i A');
+
+
+        $message = (new Swift_Message('bienvenue'))
+            ->setFrom(['contact@logic-consolessystem.fr' => 'logic-68consolessystem.fr'])
+            ->setTo(['demo@demo.fr'])
+            ->setBody("<html>
+        <head>
+        <title>Prise de contact</title>
+        </head>
+        <body style=\"background-color:#fafafa;\">
+        <div style=\"padding:20px;\">
+        <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
+
+
+        
+        <table style=\"border:1px solid #000\">
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Nom : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Prénom : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Email : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
+        </tr>
+        </table>
+        <table style=\"border:1px solid #000\">
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Adresse : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Ville : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
+        </tr>
+        <tr>
+        <td style=\"border:1px solid #000; width:100px\">Code postal : </td>
+        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
+        </tr>
+        </table>
+        <br><br>
+        <table>
+        <tr>
+        <td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
+        </tr>
+        </table>
+        </body>
+        </html>");
+
+        $type = $message->getHeaders()->get('Content-Type');
+        $type->setValue('text/html');
+        $type->setParameter('charset', 'utf-8');
+
+        //echo $type->toString();
+        $result = $mailer->send($message);
+
+        if (!empty($errors)) {
+            $tab2 = ['status' => 'fail', 'error' => $errors];
+        } 
+    }
+    if (isset($sent) && $sent === true) {
         $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis'];
     }
     echo json_encode($tab2);
-
-
 }
-
+*/
 
 
 
