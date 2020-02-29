@@ -16,16 +16,14 @@ export default class Contact extends Component {
             message: ''
         }
     }
-    cancelCourse = () => {
-        document.getElementById("contact-form").reset();
-    }
+
     handleSubmit(e) {
         e.preventDefault();
 
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            url: "http://localhost/MonPortfolio/mail.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
+            //url: "http://localhost/MonPortfolio/mail.php",
             //url: "http://localhost/portfolio_local/mail.php",
             data: this.state,
             headers: {
@@ -34,11 +32,12 @@ export default class Contact extends Component {
         }).then((response) => {
             console.log(response);
             if (response.data.status === 'success') {
-                console.log(response);
-                this.cancelCourse();
+                response.data.success.forEach(element =>
+                    document.getElementById(element).value = '',
+                );
             } else if (response.data.status === 'fail') {
                 response.data.error.forEach(element =>
-                    document.getElementById(element).value = 'erreur'
+                    document.getElementById(element).value = 'Champ vide...',
                 );
             }
         }).catch(error => {
@@ -60,13 +59,13 @@ export default class Contact extends Component {
                             <div className="form-row">
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
-                                    <input type="email" className="form-control" id="inputEmail" placeholder="Email"
 
+                                    <input type="email"     
+                                        className="form-control"        
+                                        id="inputEmail" placeholder="Email"
                                         value={this.state.inputEmail}
+                                        
                                         onChange={e => this.setState({ inputEmail: e.target.value })} />
-
-
-
 
                                 </div>
                                 <div className="form-group col-md-3">

@@ -15,7 +15,9 @@ for ($i = 0; $i < count($checkInfos); $i++) {
 
     if (empty($datas[$checkInfos[$i]] )) {
         $errors[] = $checkInfos[$i];
-    } 
+    } else {
+        $success[] = $checkInfos[$i];
+    }
 }
 
 if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
@@ -96,11 +98,11 @@ if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
         echo json_encode($tab3);
     }
  
-    if (!empty($errors)) {
+    if (empty($errors)) {
         $tab2 = ['status' => 'fail', 'error' => $errors];
     }
     else  {
-        $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis', 'send' => $send, 'expediteur' => $mail_exp];
+        $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis', 'error' => $send];
     }
     echo json_encode($tab2);
 
@@ -175,11 +177,11 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
             
             $result = $mailer->send($message);
             if($result === 1){
-                $tab2 = ['status' => 'success'];
+                $tab2 = ['status' => 'success', 'success' => $success];
             }
         }
         else  {
-            $tab2 = ['status' => 'fail', 'message' => 'Vos données ont été bloqués', 'send' => $errors];
+            $tab2 = ['status' => 'fail', 'message' => 'Vos données ont été bloqués', 'error' => $errors];
         }
         echo json_encode($tab2);
     }

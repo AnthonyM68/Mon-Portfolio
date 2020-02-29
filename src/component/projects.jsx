@@ -35,8 +35,8 @@ export default class Projects extends Component {
 		}
 		axios({
 			method: "POST",
-			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-			url: "http://localhost/MonPortfolio/mail.php",
+			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+			//url: "http://localhost/MonPortfolio/mail.php",
 			//url: "http://localhost/portfolio_local/like.php",
 			data:this.state,
 			headers: {
@@ -78,8 +78,6 @@ export default class Projects extends Component {
 											<p className="icon">
 												<span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/Bomberman%20v2/" target="_blank"><i className="icon-share3" /></a></span>
 												<span><a href="https://anthonym.promo-36.codeur.online/Bomberman%20v2/" target="_blank"><i className="icon-eye" /></a></span>
-
-
 												<span>
 													<a onClick={this.handleClick}>
 														<i id="bomberman" className="icon-heart"/>{this.likes.projects[0]}
