@@ -18,31 +18,28 @@ for ($i = 0; $i < count($checkInfos); $i++) {
     } 
 }
 
-
-
-
-
-/*if ($_SERVER['SERVER_NAME'] === "localhost") {*/
+if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
     $mail_dest = 'contact@logic-68consolessystem.fr';
     $mail_exp = $datas['inputEmail'];
     $subject = 'Demande de contact depuis Portfolio';
+    $message = $datas['message'];
     $headers = "From: Portfolio < $mail_exp > " . "\r\n" .
     "Reply-To: $mail_exp" . "\r\n" .
     "MIME-Version: 1.0\r\n" .
     "Content-Type: text/html; charset=utf-8\r\n";
 
-    if(mail($mail_dest, $subject, 'corps', $headers)){
+    if(mail($mail_dest, $subject, $message, $headers)){
         $send = true;
     }
-
+/*
     //Envoyez l'e-mail
-   /* $headers = "From: Yes Transfert < $inputEmail >" . "\r\n" .
+   /$headers = "From: Yes Transfert < $inputEmail >" . "\r\n" .
         "Reply-To: $inputEmail" . "\r\n" .
         "MIME-Version: 1.0\r\n" .
         "Content-Type: text/html; charset=utf-8\r\n";
     $subject = 'Contact Porfolio';
-    $message = "test";*/
-    /*
+    $message = "test";
+    
     $message = "<html>
         <head>
         <title>Prise de contact</title>
@@ -88,14 +85,16 @@ for ($i = 0; $i < count($checkInfos); $i++) {
         </tr>
         </table>
         </body>
-        </html>";*/
+        </html>";
+
+        */
 
 
-    /*if(mail($inputEmail, $subject, $message, $headers)){
+    if(mail($inputEmail, $subject, $message, $headers)){
         $sent = true;
         $tab3 = [$sent];
         echo json_encode($tab3);
-    }*/
+    }
  
     if (!empty($errors)) {
         $tab2 = ['status' => 'fail', 'error' => $errors];
@@ -104,24 +103,20 @@ for ($i = 0; $i < count($checkInfos); $i++) {
         $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis', 'send' => $send, 'expediteur' => $mail_exp];
     }
     echo json_encode($tab2);
-/*
+
 }
 
-/*
+
+
 if ($_SERVER['SERVER_NAME'] === "localhost") {
 
     if (empty($error)) {
         require_once('vendor/autoload.php');
-
         $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
             ->setUsername('10d8c72cde03e7')
             ->setPassword('bb66424e01e210');
-
-
         $mailer = new Swift_Mailer($transport);
         $date = date('j, F Y h:i A');
-
-
         $message = (new Swift_Message('bienvenue'))
             ->setFrom(['contact@logic-consolessystem.fr' => 'logic-68consolessystem.fr'])
             ->setTo(['demo@demo.fr'])
@@ -176,19 +171,16 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
         $type->setValue('text/html');
         $type->setParameter('charset', 'utf-8');
 
-        //echo $type->toString();
-        $result = $mailer->send($message);
-
-        if (!empty($errors)) {
-            $tab2 = ['status' => 'fail', 'error' => $errors];
-        } 
+        if (empty($errors)) {
+            
+            $result = $mailer->send($message);
+            if($result === 1){
+                $tab2 = ['status' => 'success'];
+            }
+        }
+        else  {
+            $tab2 = ['status' => 'fail', 'message' => 'Vos données ont été bloqués', 'send' => $errors];
+        }
+        echo json_encode($tab2);
     }
-    if (isset($sent) && $sent === true) {
-        $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis'];
-    }
-    echo json_encode($tab2);
 }
-*/
-
-
-

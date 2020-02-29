@@ -36,8 +36,8 @@ export default class Projects extends Component {
 		axios({
 			method: "POST",
 			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-			//url: "http://localhost/MonPortfolio/mail.php",
-			url: "http://localhost/portfolio_local/like.php",
+			url: "http://localhost/MonPortfolio/mail.php",
+			//url: "http://localhost/portfolio_local/like.php",
 			data:this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export default class Projects extends Component {
 					this.setState( {[i]: this.likes.projects[i] = tab[i]['likes']});
 				}
 			} else if (response.data.status === 'fail') {
-				;
+				console.log(response);
 			}
 		}).catch(error => {
 

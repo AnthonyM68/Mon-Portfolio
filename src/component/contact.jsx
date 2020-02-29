@@ -16,25 +16,28 @@ export default class Contact extends Component {
             message: ''
         }
     }
+    cancelCourse = () => {
+        document.getElementById("contact-form").reset();
+    }
     handleSubmit(e) {
         e.preventDefault();
 
         axios({
             method: "POST",
             //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            //url: "http://localhost/MonPortfolio/mail.php",
-            url: "http://localhost/portfolio_local/mail.php",
+            url: "http://localhost/MonPortfolio/mail.php",
+            //url: "http://localhost/portfolio_local/mail.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            //console.log(response.data.error);
+            console.log(response);
             if (response.data.status === 'success') {
                 console.log(response);
-                this.resetForm()
+                this.cancelCourse();
             } else if (response.data.status === 'fail') {
-                response.data.error.forEach(element => 
+                response.data.error.forEach(element =>
                     document.getElementById(element).value = 'erreur'
                 );
             }
