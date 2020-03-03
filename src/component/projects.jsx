@@ -29,8 +29,8 @@ export default class Projects extends Component {
 		}
 		axios({
 			method: "POST",
-			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-			url: "http://localhost/MonPortfolio/like.php",
+			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+			//url: "http://localhost/MonPortfolio/like.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -56,6 +56,8 @@ export default class Projects extends Component {
 					likes: this.tabBdd[i].likes,
 					backgroundImage: this.tabBdd[i].img,
 					title: this.tabBdd[i].title,
+					type: this.tabBdd[i].type,
+					categories: this.tabBdd[i].categories,
 				
 				}} />)
 			}

@@ -22,8 +22,8 @@ export default class Contact extends Component {
 
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            url: "http://localhost/MonPortfolio/mail.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
+            //url: "http://localhost/MonPortfolio/mail.php",
             //url: "http://localhost/portfolio_local/mail.php",
             data: this.state,
             headers: {

@@ -22,7 +22,6 @@ function App() {
         <Projects></Projects>
         <Blog></Blog>
         <Contact></Contact>
-       
           </div>
       </div>
     </div>
