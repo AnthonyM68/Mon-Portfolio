@@ -3,7 +3,7 @@ import axios from 'axios'
 import Project from './proj'
 
 
-export default class Projects extends Component {
+export default class Test extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -20,13 +20,20 @@ export default class Projects extends Component {
 		this.handleClick(e);
 	}
 	handleClick = (e) => {
+
 		e.preventDefault();
+		console.log(e);
+
 		this.setState({ count: this.state.count = 1 });
+
 		if (e.target.id === undefined) {
 			this.setState({ id: this.state.id = 'search' });
+			//this.setState({ id: this.state.id = 'search_likes' });
+
 		} else {
 			this.setState({ id: this.state.id = e.target.id });
 		}
+
 		axios({
 			method: "POST",
 			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",

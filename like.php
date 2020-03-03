@@ -12,17 +12,20 @@ $datas = json_decode($rest_json, true);
 
 if (isset($_POST)) {
 
-    if ($datas['id'] == 'search_likes') {
-        $likes = search_likes();
+    if ($datas['id'] === 'search') {
+        $tabInfos = search();
+       
     } else {
-        $result = recupere($datas['id']);
-        $result = $result['likes'] + $datas['count'];
-        $resultat = ajoute($result, $datas['id']);
-        $likes = search_likes();
-    }
 
-    $tab = ['status' => 'success', 'message' => "Vos données ont bien étaient transmis", "datas" => $likes, "server_name" => $_SERVER];
+        $result = recoversLikes($datas['id']);
+        $result = $result['likes'] + $datas['count'];
+        $resultat = updateLikes($result, $datas['id']);
+        $tabInfos = search();
+
+        
+    }
+    $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
 
     echo json_encode($tab);
+    
 }
-
