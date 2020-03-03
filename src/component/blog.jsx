@@ -31,7 +31,7 @@ export default class Blog extends Component {
 						<div className="desc">
 							<span><small>Mai 2018</small> | <small>Ecole Fédéral Polytechnique de Lausane </small> | <small> <i className="icon-bubble3" /></small></span>
 							<h3><a href="blog.html">Initiation au C++</a></h3>
-							<p>Cours en ligne. Apprentissage du C++. Obtention du Certificat de</p>
+							<p>Cours en ligne. Apprentissage du C++. Obtention du Certificat</p>
 						</div>
 					</div>
 					<div className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">

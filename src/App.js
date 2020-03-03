@@ -18,8 +18,8 @@ function App() {
       <div id="colorlib-main">
         <Introduction></Introduction>
         <About></About>
-        <Timeline></Timeline>
         <Projects></Projects>
+        <Timeline></Timeline>
         <Blog></Blog>
         <Contact></Contact>
           </div>
