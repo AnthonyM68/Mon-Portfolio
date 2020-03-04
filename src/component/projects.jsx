@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Project from './proj'
 
-
+/*function Alertmessage(props) {
+	return <div class={`alert ${props.name} text-center`} role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Success!</strong> You have been signed in successfully!
+</div>
+}*/
 export default class Projects extends Component {
 	constructor(props) {
 		super(props);
@@ -11,7 +16,7 @@ export default class Projects extends Component {
 			id: null,
 		}
 		this.tabBdd = null
-		
+
 	}
 	componentDidMount() {
 		window.addEventListener('load', this.handleLoad);
@@ -30,7 +35,7 @@ export default class Projects extends Component {
 		axios({
 			method: "POST",
 			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-			url: "http://localhost/MonPortfolio/like.php",
+			url: "http://localhost/MonPortfolio/public/php/like.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -39,8 +44,12 @@ export default class Projects extends Component {
 			if (response.data.status === 'success') {
 				if (response.data.tabInfos) {
 					this.setState({ tabBdd: this.tabBdd = response.data.tabInfos });
+					/*this.setState({ alert: this.alert = <Alertmessage name="alert-danger
+					" /> });*/
 				}
 			} else if (response.data.status === 'fail') {
+				/*this.setState({ alert: this.alert = <Alertmessage name="alert-danger" /> });*/
+
 			}
 		}).catch(error => {
 			;
@@ -58,7 +67,7 @@ export default class Projects extends Component {
 					title: this.tabBdd[i].title,
 					type: this.tabBdd[i].type,
 					categories: this.tabBdd[i].categories,
-				
+
 				}} />)
 			}
 		}
@@ -76,8 +85,9 @@ export default class Projects extends Component {
 							{item}
 						</div>
 					</div>
-				</section>
+				</section>	
 			</div>
 		)
 	}
+
 }

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-
+/*function Alertmessage(props) {
+	return <div class={`alert ${props.name} text-center`} role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Success!</strong> You have been signed in successfully!
+</div>
+}*/
 export default class Contact extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +28,7 @@ export default class Contact extends Component {
         axios({
             method: "POST",
             //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            url: "http://localhost/MonPortfolio/mail.php",
+            url: "http://localhost/MonPortfolio/public/php/mail.php",
             //url: "http://localhost/portfolio_local/mail.php",
             data: this.state,
             headers: {
@@ -36,8 +41,10 @@ export default class Contact extends Component {
                     document.getElementById(element).value = '',
                 );
             } else if (response.data.status === 'fail') {
+
                 response.data.error.forEach(element =>
                     document.getElementById(element).value = 'Champ vide...',
+                    
                 );
             }
         }).catch(error => {
@@ -46,7 +53,7 @@ export default class Contact extends Component {
     }
     render() {
         return (
-            <div>
+            <div> 
                 <section className="colorlib-contact" data-section="contact">
                     <div className="colorlib-narrow-content">
                         <div className="row">
@@ -54,19 +61,16 @@ export default class Contact extends Component {
                                 <span className="heading-meta">Contact</span>
                                 <h2 className="colorlib-heading animate-box">Formulaire de contact</h2>
                             </div>
-                        </div>
-                        <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
+                        </div>         
+                        <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">                
                             <div className="form-row">
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
-
                                     <input type="email"
                                         className="form-control"
                                         id="inputEmail" placeholder="Email"
                                         value={this.state.inputEmail}
-
                                         onChange={e => this.setState({ inputEmail: e.target.value })} />
-
                                 </div>
                                 <div className="form-group col-md-3">
                                     <label>Nom</label>

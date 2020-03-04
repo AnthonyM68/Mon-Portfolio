@@ -1,7 +1,55 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import News from './news'
 
 export default class Blog extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+		}
+	}
+	componentDidMount() {
+        window.addEventListener('load', this.handleLoad);
+    }
+    handleLoad = (e) => {
+        this.handleClick(e);
+    }
+    handleClick = (e) => {
+        e.preventDefault();
+        axios({
+            method: "POST",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+            url: "http://localhost/MonPortfolio/public/php/news.php",
+            data: this.state,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+			console.log(response)
+            if (response.data.status === 'success') {
+                if (response.data.tabInfos) {
+					this.setState({ tabNews: this.tabNews = response.data.tabInfos });
+					console.log(this.tabNews)
+                }
+            } else if (response.data.status === 'fail') {
+            }
+        }).catch(error => {
+            ;
+        })
+    }
   render() {
+	const item = [];
+	console.log(item);
+	if (this.tabNews != null) {
+		for (let i = 0; i < this.tabNews.length; i++) {
+			item.push(< News key={this.tabNews[i].id} data={{
+				date: this.tabNews[i].date,
+				institute: this.tabNews[i].institute,
+				description: this.tabNews[i].description,
+				content: this.tabNews[i].content,
+			}} />)
+		}
+	}
     return (
       <div>
         <section className="colorlib-blog" data-section="blog">
@@ -12,33 +60,11 @@ export default class Blog extends Component {
 					<h2 className="colorlib-heading">Blog récent</h2>
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-						<div className="desc">
-							<span><small>28 Décembre 2019 </small> | <small> Mooc ANSSI </small> | <small> <i className="icon-bubble3" /></small></span>
-							<h3><a href="blog.html">Initiation à la cybersécurité</a></h3>
-							<p>Approfondissement de mes connaissances sur les risques liés au cyberespace et les bonnes pratique a mettre en oeuvre pour utiliser mes outils</p>
-						</div>
-					</div>
-					<div className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInRight">
-						<div className="desc">
-							<span><small>Octobre 2019</small> | <small>Certification GIT </small> | <small> <i className="icon-bubble3" /></small></span>
-							<h3><a href="blog.html">Versioning d'aplication</a></h3>
-							<p>Obtention du Certificat Openclassroom</p>
-						</div>
-					</div>
-					<div className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInRight">
-						<div className="desc">
-							<span><small>Mai 2018</small> | <small>Ecole Fédéral Polytechnique de Lausane </small> | <small> <i className="icon-bubble3" /></small></span>
-							<h3><a href="blog.html">Initiation au C++</a></h3>
-							<p>Cours en ligne. Apprentissage du C++. Obtention du Certificat</p>
-						</div>
-					</div>
-					<div className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-					</div>
+				<div className="row" className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
+					{item}
 				</div>
 			</div>
-			</section>
+		</section>
       </div>
     )
   }
