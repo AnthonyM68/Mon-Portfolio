@@ -4,6 +4,9 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
 header("Content-Type: application/json");
 
+require_once('config.php');
+require_once('admin.php');
+
 $rest_json = file_get_contents("php://input");
 $datas = json_decode($rest_json, true);
 
@@ -19,39 +22,23 @@ for ($i = 0; $i < count($checkInfos); $i++) {
         $success[] = $checkInfos[$i];
     }
 }
-
-if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
-    $mail_dest = 'contact@logic-68consolessystem.fr';
-    $mail_exp = $datas['inputEmail'];
-    $subject = 'Demande de contact depuis Portfolio';
-    $message = $datas['message'];
-    $headers = "From: Portfolio < $mail_exp > " . "\r\n" .
-    "Reply-To: $mail_exp" . "\r\n" .
-    "MIME-Version: 1.0\r\n" .
-    "Content-Type: text/html; charset=utf-8\r\n";
-
-    if(mail($mail_dest, $subject, $message, $headers)){
-        $send = true;
-    }
 /*
+if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
     //Envoyez l'e-mail
-   /$headers = "From: Yes Transfert < $inputEmail >" . "\r\n" .
-        "Reply-To: $inputEmail" . "\r\n" .
+        $mail_exp = $datas['inputEmail'];
+        $headers = "From: Portfolio < $mail_exp > " . "\r\n" .
+        "Reply-To: $mail_exp" . "\r\n" .
         "MIME-Version: 1.0\r\n" .
         "Content-Type: text/html; charset=utf-8\r\n";
-    $subject = 'Contact Porfolio';
-    $message = "test";
-    
-    $message = "<html>
+        $subject = 'Demande de contact depuis Portfolio';
+        $mail_dest = 'contact@logic-68consolessystem.fr';
+        $message = "<html>
         <head>
         <title>Prise de contact</title>
         </head>
         <body style=\"background-color:#fafafa;\">
         <div style=\"padding:20px;\">
         <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
-
-
-        
         <table style=\"border:1px solid #000\">
         <tr>
         <td style=\"border:1px solid #000; width:100px\">Nom : </td>
@@ -89,31 +76,32 @@ if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
         </body>
         </html>";
 
-        */
-
-
-    if(mail($inputEmail, $subject, $message, $headers)){
-        $sent = true;
-        $tab3 = [$sent];
-        echo json_encode($tab3);
-    }
- 
-    if (empty($errors)) {
-        $tab2 = ['status' => 'fail', 'error' => $errors];
-    }
-    else  {
-        $tab2 = ['status' => 'success', 'message' => 'Vos données ont bien été transmis', 'error' => $send];
-    }
-    echo json_encode($tab2);
+        
+        if (empty($errors)) {
+            
+            if(mail($mail_dest, $subject, $message, $headers)){
+                $result = mailbdd($datas['inputEmail'], $datas['inputFirstName'], $datas['inputLastName'], $datas['inputAddress'], $datas['inputCity'], $datas['inputZip'], $datas['inputPhone'], $datas['message']);
+                if($result === true){
+                    $tab2 = ['status' => 'success', 'message' => 'Erreur de connection avec la Bdd'];
+                }
+            } else {
+                $tab2 = ['status' => 'fail', 'message' => 'Erreur d\'envois'];
+            }
+        }
+        else  {
+            $tab2 = ['status' => 'fail', 'message' => 'Vos données ont été bloqués', 'error' => $errors];
+        }
+        echo json_encode($tab2);
 
 }
-
+*/
 
 
 if ($_SERVER['SERVER_NAME'] === "localhost") {
 
     if (empty($error)) {
         require_once('../../vendor/autoload.php');
+
         $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
             ->setUsername('10d8c72cde03e7')
             ->setPassword('bb66424e01e210');
@@ -174,10 +162,19 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
         $type->setParameter('charset', 'utf-8');
 
         if (empty($errors)) {
-            
             $result = $mailer->send($message);
-            if($result === 1){
-                $tab2 = ['status' => 'success', 'success' => $success];
+
+            if($result == true){
+                $result = mailbdd($datas['inputEmail'], $datas['inputLastName'], $datas['inputFirstName'], $datas['inputAddress'], $datas['inputCity'], $datas['inputZip'], $datas['inputPhone'], $datas['message']);
+
+                if($result === true){
+                    $tab2 = ['status' => 'success', 'message' => 'message bien envoyer'];
+                } else {
+                    $tab2 = ['status' => 'fail', 'message' => 'Erreur de connection avec la Bdd', 'result' => $result];
+                }
+                
+            } else {
+                $tab2 = ['status' => 'fail', 'message' => '$result'];
             }
         }
         else  {

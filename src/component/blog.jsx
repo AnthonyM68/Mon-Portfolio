@@ -60,7 +60,7 @@ export default class Blog extends Component {
 					<h2 className="colorlib-heading">Blog récent</h2>
 					</div>
 				</div>
-				<div className="row" className="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
+				<div className="row animate-box" data-animate-effect="fadeInLeft">
 					{item}
 				</div>
 			</div>

@@ -41,9 +41,11 @@ export default class Contact extends Component {
                     document.getElementById(element).value = '',
                 );
             } else if (response.data.status === 'fail') {
-
+                    let error;
                 response.data.error.forEach(element =>
+               
                     document.getElementById(element).value = 'Champ vide...',
+                    //document.getElementById().setAttribute('class', 'alert alert-danger'),
                     
                 );
             }
