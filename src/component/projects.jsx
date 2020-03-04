@@ -29,8 +29,8 @@ export default class Projects extends Component {
 		}
 		axios({
 			method: "POST",
-			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-			//url: "http://localhost/MonPortfolio/like.php",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+			url: "http://localhost/MonPortfolio/like.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export default class Projects extends Component {
 						<div className="row">
 							<div className="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 								<span className="heading-meta">Projets</span>
-								<h2 className="colorlib-heading animate-box">Projets Récent</h2>
+								<h2 className="colorlib-heading animate-box">Projets Récents</h2>
 							</div>
 						</div>
 						<div className="row animate-box" data-animate-effect="fadeInLeft">

@@ -11,21 +11,26 @@ $rest_json = file_get_contents("php://input");
 $datas = json_decode($rest_json, true);
 
 if (isset($_POST)) {
-
     if ($datas['id'] === 'search') {
         $tabInfos = search();
-       
+        $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
+        echo json_encode($tab);
     } else {
-
         $result = recoversLikes($datas['id']);
-        $result = $result['likes'] + $datas['count'];
-        $resultat = updateLikes($result, $datas['id']);
-        $tabInfos = search();
-
-        
+        if ($result) {
+            $result = $result['likes'] + $datas['count'];
+            $result = updateLikes($result, $datas['id']);
+            if ($result) {
+                $tabInfos = search();
+                $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
+                echo json_encode($tab);
+            } else {
+                $tab = ['status' => 'fail', 'likes' => 'no connect'];
+                echo json_encode($tab);
+            }
+        } else {
+            $tab = ['status' => 'fail', 'likes' => 'no connect'];
+            echo json_encode($tab);
+        }
     }
-    $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
-
-    echo json_encode($tab);
-    
 }

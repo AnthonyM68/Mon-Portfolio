@@ -22,8 +22,8 @@ export default class Contact extends Component {
 
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            //url: "http://localhost/MonPortfolio/mail.php",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
+            url: "http://localhost/MonPortfolio/mail.php",
             //url: "http://localhost/portfolio_local/mail.php",
             data: this.state,
             headers: {
@@ -60,11 +60,11 @@ export default class Contact extends Component {
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
 
-                                    <input type="email"     
-                                        className="form-control"        
+                                    <input type="email"
+                                        className="form-control"
                                         id="inputEmail" placeholder="Email"
                                         value={this.state.inputEmail}
-                                        
+
                                         onChange={e => this.setState({ inputEmail: e.target.value })} />
 
                                 </div>
@@ -127,8 +127,7 @@ export default class Contact extends Component {
                         </form>
                     </div>
                 </section>
-            </div>
+            </div >
         )
     }
 }
-

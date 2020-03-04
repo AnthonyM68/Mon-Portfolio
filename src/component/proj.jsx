@@ -11,7 +11,7 @@ export default class Project extends Component {
                             <span>{this.props.data.categories}</span>
                             <span>{this.props.data.type}</span>
                             <p className="icon">
-                                <span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/Bomberman%20v2/"><i className="icon-share3" /></a></span>
+                                <span><a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/${this.props.data.title}`}><i className="icon-share3" /></a></span>
                                 <span>
                                     <a href={`https://anthonym.promo-36.codeur.online/${this.props.data.title}`}>
                                     <i className="icon-eye" />
