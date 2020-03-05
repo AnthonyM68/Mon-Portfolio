@@ -22,7 +22,52 @@ for ($i = 0; $i < count($checkInfos); $i++) {
         $success[] = $checkInfos[$i];
     }
 }
-/*
+
+
+$message = "<html>
+<head>
+<title>Prise de contact</title>
+</head>
+<body style=\"background-color:#fafafa;\">
+<div style=\"padding:20px;\">
+<span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
+<table style=\"border:1px solid #000\">
+<tr>
+<td style=\"border:1px solid #000; width:100px\">Nom : </td>
+<td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
+</tr>
+<tr>
+<td style=\"border:1px solid #000; width:100px\">Prénom : </td>
+<td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
+</tr>
+<tr>
+<td style=\"border:1px solid #000; width:100px\">Email : </td>
+<td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
+</tr>
+</table>
+<table style=\"border:1px solid #000\">
+<tr>
+<td style=\"border:1px solid #000; width:100px\">Adresse : </td>
+<td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
+</tr>
+<tr>
+<td style=\"border:1px solid #000; width:100px\">Ville : </td>
+<td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
+</tr>
+<tr>
+<td style=\"border:1px solid #000; width:100px\">Code postal : </td>
+<td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
+</tr>
+</table>
+<br><br>
+<table>
+<tr>
+<td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
+</tr>
+</table>
+</body>
+</html>";
+
 if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
     //Envoyez l'e-mail
         $mail_exp = $datas['inputEmail'];
@@ -32,72 +77,26 @@ if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
         "Content-Type: text/html; charset=utf-8\r\n";
         $subject = 'Demande de contact depuis Portfolio';
         $mail_dest = 'contact@logic-68consolessystem.fr';
-        $message = "<html>
-        <head>
-        <title>Prise de contact</title>
-        </head>
-        <body style=\"background-color:#fafafa;\">
-        <div style=\"padding:20px;\">
-        <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
-        <table style=\"border:1px solid #000\">
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Nom : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Prénom : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Email : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
-        </tr>
-        </table>
-        <table style=\"border:1px solid #000\">
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Adresse : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Ville : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Code postal : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
-        </tr>
-        </table>
-        <br><br>
-        <table>
-        <tr>
-        <td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
-        </tr>
-        </table>
-        </body>
-        </html>";
-
-        
+       
         if (empty($errors)) {
             
             if(mail($mail_dest, $subject, $message, $headers)){
                 $result = mailbdd($datas['inputEmail'], $datas['inputFirstName'], $datas['inputLastName'], $datas['inputAddress'], $datas['inputCity'], $datas['inputZip'], $datas['inputPhone'], $datas['message']);
                 if($result === true){
-                    $tab2 = ['status' => 'success', 'message' => 'Erreur de connection avec la Bdd'];
+                    $tab2 = ['status' => 'success', 'message' => $checkInfos];
+                } else {
+                    $tab2 = ['status' => 'fail', 'message' => 'bdd'];
                 }
             } else {
-                $tab2 = ['status' => 'fail', 'message' => 'Erreur d\'envois'];
+                $tab2 = ['status' => 'fail', 'message' => 'senderror'];
             }
         }
         else  {
-            $tab2 = ['status' => 'fail', 'message' => 'Vos données ont été bloqués', 'error' => $errors];
+            $tab2 = ['status' => 'fail', 'error' => $errors];
         }
         echo json_encode($tab2);
 
-}
-*/
-
-
-if ($_SERVER['SERVER_NAME'] === "localhost") {
+} else if ($_SERVER['SERVER_NAME'] === "localhost") {
 
     if (empty($error)) {
         require_once('../../vendor/autoload.php');
@@ -110,52 +109,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
         $message = (new Swift_Message('bienvenue'))
             ->setFrom(['contact@logic-consolessystem.fr' => 'logic-68consolessystem.fr'])
             ->setTo(['demo@demo.fr'])
-            ->setBody("<html>
-        <head>
-        <title>Prise de contact</title>
-        </head>
-        <body style=\"background-color:#fafafa;\">
-        <div style=\"padding:20px;\">
-        <span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( Nouveau Contact )</span><br><br>
-
-
-        
-        <table style=\"border:1px solid #000\">
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Nom : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputFirstName'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Prénom : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputLastName'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Email : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputEmail'] . "</td>
-        </tr>
-        </table>
-        <table style=\"border:1px solid #000\">
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Adresse : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputAddress'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Ville : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputCity'] . "</td>
-        </tr>
-        <tr>
-        <td style=\"border:1px solid #000; width:100px\">Code postal : </td>
-        <td style=\"border:1px solid #000; width:500px\">" . $datas['inputZip'] . "</td>
-        </tr>
-        </table>
-        <br><br>
-        <table>
-        <tr>
-        <td style=\"border:1px solid #000; width:600px;heigth:200px\"> " . $datas['message'] . "</td>
-        </tr>
-        </table>
-        </body>
-        </html>");
+            ->setBody($message);
 
         $type = $message->getHeaders()->get('Content-Type');
         $type->setValue('text/html');
@@ -168,17 +122,17 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
                 $result = mailbdd($datas['inputEmail'], $datas['inputLastName'], $datas['inputFirstName'], $datas['inputAddress'], $datas['inputCity'], $datas['inputZip'], $datas['inputPhone'], $datas['message']);
 
                 if($result === true){
-                    $tab2 = ['status' => 'success', 'message' => 'message bien envoyer'];
+                    $tab2 = ['status' => 'success', 'message' => $checkInfos];
                 } else {
-                    $tab2 = ['status' => 'fail', 'message' => 'Erreur de connection avec la Bdd', 'result' => $result];
+                    $tab2 = ['status' => 'fail', 'message' => 'bdd'];
                 }
-                
+
             } else {
-                $tab2 = ['status' => 'fail', 'message' => '$result'];
+                $tab2 = ['status' => 'fail', 'message' => 'senderror'];
             }
         }
         else  {
-            $tab2 = ['status' => 'fail', 'message' => 'Vos données ont été bloqués', 'error' => $errors];
+            $tab2 = ['status' => 'fail', 'error' => $errors];
         }
         echo json_encode($tab2);
     }

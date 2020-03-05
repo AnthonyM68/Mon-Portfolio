@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-/*function Alertmessage(props) {
-	return <div class={`alert ${props.name} text-center`} role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Success!</strong> You have been signed in successfully!
-</div>
-}*/
+function fadeOut(el) {
+    var tick = function () {
+        el.style.opacity = +el.style.opacity - 0.02;
+        if (+el.style.opacity > 0) {
+            setTimeout(tick, 80)
+        }
+    };
+    tick();
+}
+
 export default class Contact extends Component {
     constructor(props) {
         super(props);
@@ -18,12 +22,15 @@ export default class Contact extends Component {
             inputCity: '',
             inputZip: '',
             inputPhone: '',
-            message: ''
+            message: '',
+            alert: '',
+            warning: ''
         }
     }
 
     handleSubmit(e) {
         e.preventDefault();
+        let element = document.getElementById('alert');
 
         axios({
             method: "POST",
@@ -35,19 +42,45 @@ export default class Contact extends Component {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            console.log(response);
             if (response.data.status === 'success') {
-                response.data.success.forEach(element =>
-                    document.getElementById(element).value = '',
+                let styleResponse = [];
+
+                this.setState({ alert: this.state.alert = 'Merci d\'avoir pris contact' });
+                this.setState({ warning: this.state.warning = 'alert alert-success' });
+                element.setAttribute('style', 'opacity:1');
+                fadeOut(element);
+
+                response.data.message.forEach(element =>
+                    styleResponse.push(document.getElementById(element))
                 );
+                for (let i = 0; i < response.data.message.length; i++) {
+                    styleResponse[i].value = "";
+                    styleResponse[i].setAttribute('style', '');
+                }
             } else if (response.data.status === 'fail') {
-                    let error;
+                if (response.data.message === 'bdd') {
+                    this.setState({ alert: this.state.alert = 'une erreur inattendue s\'est produite avec la base de données' });
+                    this.setState({ warning: this.state.warning = 'alert alert-danger' });
+                    element.setAttribute('style', 'opacity:1');
+                    fadeOut(element);
+                } else if (response.data.message === 'senderror'){
+                    this.setState({ alert: this.state.alert = 'une erreur inattendue s\'est produite lors de l\'envois de votre Email' });
+                    this.setState({ warning: this.state.warning = 'alert alert-danger' });
+                    element.setAttribute('style', 'opacity:1');
+                    fadeOut(element);
+                }
+                let styleResponse = [];
                 response.data.error.forEach(element =>
-               
-                    document.getElementById(element).value = 'Champ vide...',
-                    //document.getElementById().setAttribute('class', 'alert alert-danger'),
-                    
+                    styleResponse.push(document.getElementById(element))
                 );
+                for (let i = 0; i < response.data.error.length; i++) {
+                    styleResponse[i].value = "Champ vide";
+                    styleResponse[i].setAttribute('style', 'background-color: #f2dede;color: #a94442;');
+                    styleResponse[i].addEventListener('click', function () {
+                        styleResponse[i].value = '';
+                        styleResponse[i].setAttribute('style', '');
+                    })
+                }
             }
         }).catch(error => {
             console.log(error);
@@ -55,7 +88,7 @@ export default class Contact extends Component {
     }
     render() {
         return (
-            <div> 
+            <div>
                 <section className="colorlib-contact" data-section="contact">
                     <div className="colorlib-narrow-content">
                         <div className="row">
@@ -63,9 +96,13 @@ export default class Contact extends Component {
                                 <span className="heading-meta">Contact</span>
                                 <h2 className="colorlib-heading animate-box">Formulaire de contact</h2>
                             </div>
-                        </div>         
-                        <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">                
+                        </div>
+                        <div className="col-md-12 text-center">
+                            <div id="alert" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                        </div>
+                        <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className="form-row">
+
                                 <div className="form-group col-md-6">
                                     <label>Email</label>
                                     <input type="email"
@@ -86,6 +123,7 @@ export default class Contact extends Component {
                                         value={this.state.inputLastName}
                                         onChange={e => this.setState({ inputLastName: e.target.value })} />
                                 </div>
+
                             </div>
                             <div className="form-group col-md-12">
                                 <label>Addresse</label>
@@ -94,6 +132,7 @@ export default class Contact extends Component {
                                     onChange={e => this.setState({ inputAddress: e.target.value })} />
                             </div>
                             <div className="form-row">
+
                                 <div className="form-group col-md-6">
                                     <label>Ville</label>
                                     <input type="text" className="form-control" id="inputCity" placeholder="Ville"
@@ -116,24 +155,22 @@ export default class Contact extends Component {
                             <div className="form-row">
                                 <div className="form-group col-md-12">
                                     <label>Message</label>
-                                    <textarea className="form-group col-md-12" id="message" name="message" placeholder="Votre message ici..."
+                                    <textarea className="form-control" id="message" name="message" placeholder="Votre message ici..."
                                         onChange={e => this.setState({ message: e.target.value })}
                                         value={this.state.message}>
                                     </textarea>
                                 </div>
                             </div>
                             <div className="form-group col-md-12 text-center">
-                                <button type="submit" className="btn btn-primary">Submit</button>
-                            </div>
-                            <div>
-                                {this.state.mailSent &&
-                                    <div>Merci d'avoir contacter Anthony</div>
-                                }
+                                <button type="submit" className="btn btn-secondary">Soumettre</button>
                             </div>
                         </form>
                     </div>
                 </section>
-            </div >
+
+            </div>
+
+
         )
     }
 }

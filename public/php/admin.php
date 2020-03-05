@@ -33,9 +33,9 @@ function updateLikes($result, $project)
    $req = $pdo->prepare('UPDATE mylikes SET likes=? WHERE project=?');
    return $req->execute([$result, $project]);
 }
+
 function mailbdd($email, $last_name, $first_name, $adress, $city, $postal_code, $phone, $message)
 {
-   echo json_encode('bdddata');
    global $pdo;
    $req = $pdo->prepare('INSERT INTO mail (email, last_name, first_name, adress, city, postal_code, phone, content) VALUE (?, ?, ?, ?, ?, ?, ?, ?) ');
    return $req->execute([$email, $last_name, $first_name, $adress, $city, $postal_code, $phone, $message]);

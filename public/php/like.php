@@ -17,7 +17,8 @@ if (isset($_POST)) {
         echo json_encode($tab);
     } else {
         $result = recoversLikes($datas['id']);
-        if ($result) {
+        echo json_encode($result);
+        if ($result === true) {
             $result = $result['likes'] + $datas['count'];
             $result = updateLikes($result, $datas['id']);
             if ($result) {
@@ -25,11 +26,11 @@ if (isset($_POST)) {
                 $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
                 echo json_encode($tab);
             } else {
-                $tab = ['status' => 'fail', 'likes' => 'no connect'];
+                $tab = ['status' => 'fail', 'message' => 'no connect'];
                 echo json_encode($tab);
             }
         } else {
-            $tab = ['status' => 'fail', 'likes' => 'no connect'];
+            $tab = ['status' => 'fail', 'message' => 'no connect'];
             echo json_encode($tab);
         }
     }

@@ -2,18 +2,23 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Project from './proj'
 
-/*function Alertmessage(props) {
-	return <div class={`alert ${props.name} text-center`} role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Success!</strong> You have been signed in successfully!
-</div>
-}*/
+function fadeOut(el) {
+    var tick = function () {
+        el.style.opacity = +el.style.opacity - 0.02;
+        if (+el.style.opacity > 0) {
+            setTimeout(tick, 100)
+        }
+    };
+    tick();
+}
 export default class Projects extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			count: 0,
 			id: null,
+			alert: '',
+            warning: ''
 		}
 		this.tabBdd = null
 
@@ -26,6 +31,9 @@ export default class Projects extends Component {
 	}
 	handleClick = (e) => {
 		e.preventDefault();
+
+		let element = document.getElementById('alert');
+
 		this.setState({ count: this.state.count = 1 });
 		if (e.target.id === undefined) {
 			this.setState({ id: this.state.id = 'search' });
@@ -41,14 +49,18 @@ export default class Projects extends Component {
 				'Content-Type': 'application/json'
 			}
 		}).then((response) => {
+
 			if (response.data.status === 'success') {
 				if (response.data.tabInfos) {
 					this.setState({ tabBdd: this.tabBdd = response.data.tabInfos });
-					/*this.setState({ alert: this.alert = <Alertmessage name="alert-danger
-					" /> });*/
+					
 				}
 			} else if (response.data.status === 'fail') {
-				/*this.setState({ alert: this.alert = <Alertmessage name="alert-danger" /> });*/
+				
+				this.setState({ alert: this.state.alert = 'une erreur inattendue s\'est produite avec la base de données' });
+                this.setState({ warning: this.state.warning = 'alert alert-danger' });
+                element.setAttribute('style', 'opacity:1');
+                fadeOut(element);
 
 			}
 		}).catch(error => {
@@ -83,6 +95,7 @@ export default class Projects extends Component {
 						</div>
 						<div className="row animate-box" data-animate-effect="fadeInLeft">
 							{item}
+							<div id="alert" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
 						</div>
 					</div>
 				</section>	

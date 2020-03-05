@@ -306,11 +306,7 @@
 		owlCrouselFeatureSlide();
 	});
 
-	/*window.setTimeout(function () {
-		$(".alert").fadeTo(1000, 0).slideUp(2000, function () {
-			$(this).remove();
-		});
-	}, 2000);*/
+	
 
 
 }());
