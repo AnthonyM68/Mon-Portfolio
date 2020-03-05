@@ -16,12 +16,11 @@ export default class Projects extends Component {
 		super(props);
 		this.state = {
 			count: 0,
-			id: null,
+			id: '',
 			alert: '',
             warning: ''
 		}
 		this.tabBdd = null
-
 	}
 	componentDidMount() {
 		window.addEventListener('load', this.handleLoad);
@@ -33,35 +32,58 @@ export default class Projects extends Component {
 		e.preventDefault();
 
 		let element = document.getElementById('alert');
+		//console.log(e.target.id)
+		this.setState(state => {
+			return {
+				count: state.count = 1,
+			};
+		});
+		console.log(this.state.count)
 
-		this.setState({ count: this.state.count = 1 });
 		if (e.target.id === undefined) {
-			this.setState({ id: this.state.id = 'search' });
+			this.setState(state => {
+				return {
+					id: state.id = 'search',
+				};
+			});
 		} else {
-			this.setState({ id: this.state.id = e.target.id });
+			this.setState({id: this.state.id = e.target.id});
 		}
+		//console.log(this.state)
 		axios({
 			method: "POST",
-			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/like.php",
 			url: "http://localhost/MonPortfolio/public/php/like.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		}).then((response) => {
-
+			//console.log(response);
 			if (response.data.status === 'success') {
+				console.log(response.data);
 				if (response.data.tabInfos) {
-					this.setState({ tabBdd: this.tabBdd = response.data.tabInfos });
-					
+					this.setState(state => {
+						return {
+							tabBdd: this.tabBdd = response.data.tabInfos,
+						};
+					});	
 				}
+
 			} else if (response.data.status === 'fail') {
-				
-				this.setState({ alert: this.state.alert = 'une erreur inattendue s\'est produite avec la base de données' });
-                this.setState({ warning: this.state.warning = 'alert alert-danger' });
+				//console.log(response.data);
+				this.setState(state => {
+					return {
+						alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
+					};
+				});
+				this.setState(state => {
+					return {
+						warning: state.warning = 'alert alert-danger',
+					};
+				});
                 element.setAttribute('style', 'opacity:1');
                 fadeOut(element);
-
 			}
 		}).catch(error => {
 			;
@@ -71,6 +93,7 @@ export default class Projects extends Component {
 		const item = [];
 		if (this.tabBdd != null) {
 			for (let i = 0; i < this.tabBdd.length; i++) {
+
 				item.push(< Project key={this.tabBdd[i].id} data={{
 					handleClick: this.handleClick.bind(this),
 					project: this.tabBdd[i].project,

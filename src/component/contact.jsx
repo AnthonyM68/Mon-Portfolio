@@ -34,9 +34,8 @@ export default class Contact extends Component {
 
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/mail.php",
-            url: "http://localhost/MonPortfolio/public/php/mail.php",
-            //url: "http://localhost/portfolio_local/mail.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/mail.php",
+            //url: "http://localhost/MonPortfolio/public/php/mail.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
@@ -44,9 +43,16 @@ export default class Contact extends Component {
         }).then((response) => {
             if (response.data.status === 'success') {
                 let styleResponse = [];
-
-                this.setState({ alert: this.state.alert = 'Merci d\'avoir pris contact' });
-                this.setState({ warning: this.state.warning = 'alert alert-success' });
+                this.setState(state => {
+					return {
+						alert: state.alert = 'Merci d\'avoir pris contact',
+					};
+				});
+                this.setState(state => {
+					return {
+						warning: state.warning = 'alert alert-success',
+					};
+				});
                 element.setAttribute('style', 'opacity:1');
                 fadeOut(element);
 
@@ -59,13 +65,29 @@ export default class Contact extends Component {
                 }
             } else if (response.data.status === 'fail') {
                 if (response.data.message === 'bdd') {
-                    this.setState({ alert: this.state.alert = 'une erreur inattendue s\'est produite avec la base de données' });
-                    this.setState({ warning: this.state.warning = 'alert alert-danger' });
+                    this.setState(state => {
+                        return {
+                            alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données' ,
+                        };
+                    });
+                    this.setState(state => {
+                        return {
+                            warning: state.warning = 'alert alert-danger',
+                        };
+                    });
                     element.setAttribute('style', 'opacity:1');
                     fadeOut(element);
                 } else if (response.data.message === 'senderror'){
-                    this.setState({ alert: this.state.alert = 'une erreur inattendue s\'est produite lors de l\'envois de votre Email' });
-                    this.setState({ warning: this.state.warning = 'alert alert-danger' });
+                    this.setState(state => {
+                        return {
+                            alert: state.alert = 'une erreur inattendue s\'est produite lors de l\'envois de votre Email' ,
+                        };
+                    });
+                    this.setState(state => {
+                        return {
+                            warning: state.warning = 'alert alert-danger',
+                        };
+                    });
                     element.setAttribute('style', 'opacity:1');
                     fadeOut(element);
                 }

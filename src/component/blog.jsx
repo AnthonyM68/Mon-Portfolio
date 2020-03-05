@@ -18,18 +18,16 @@ export default class Blog extends Component {
         e.preventDefault();
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
-            url: "http://localhost/MonPortfolio/public/php/news.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+            //url: "http://localhost/MonPortfolio/public/php/news.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-			console.log(response)
             if (response.data.status === 'success') {
                 if (response.data.tabInfos) {
 					this.setState({ tabNews: this.tabNews = response.data.tabInfos });
-					console.log(this.tabNews)
                 }
             } else if (response.data.status === 'fail') {
             }
@@ -39,7 +37,6 @@ export default class Blog extends Component {
     }
   render() {
 	const item = [];
-	console.log(item);
 	if (this.tabNews != null) {
 		for (let i = 0; i < this.tabNews.length; i++) {
 			item.push(< News key={this.tabNews[i].id} data={{
