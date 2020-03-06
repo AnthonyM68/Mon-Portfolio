@@ -40,4 +40,10 @@ function mailbdd($email, $last_name, $first_name, $adress, $city, $postal_code, 
    $req = $pdo->prepare('INSERT INTO mail (email, last_name, first_name, adress, city, postal_code, phone, content) VALUE (?, ?, ?, ?, ?, ?, ?, ?) ');
    return $req->execute([$email, $last_name, $first_name, $adress, $city, $postal_code, $phone, $message]);
 }
-
+function searchAbout()
+{
+   global $pdo;
+   $req = $pdo->prepare('SELECT * FROM about');
+   $req->execute();
+   return $req->fetchAll();
+}

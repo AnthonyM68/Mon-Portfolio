@@ -1,7 +1,92 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
+
+function Abouts(props){
+
+    return <div><span className="heading-meta">{props.data.meta}</span>
+        <h2 className="colorlib-heading">{props.data.title}</h2>
+        <h4>{props.data.about}</h4></div>
+   
+}
+function fadeOut(el) {
+    var tick = function () {
+        el.style.opacity = +el.style.opacity - 0.02;
+        if (+el.style.opacity > 0) {
+            setTimeout(tick, 100)
+        }
+    };
+    tick();
+}
 export default class About extends Component {
+    constructor(props) {
+		super(props);
+		this.state = {
+            id: '',
+
+		}
+		this.tabBdd = null
+	}
+	componentDidMount() {
+		window.addEventListener('load', this.handleLoad);
+	}
+	handleLoad = (e) => {
+		this.handleClick(e);
+	}
+	handleClick = (e) => {
+		e.preventDefault();
+        let element = document.getElementById('alert');
+		axios({
+			method: "POST",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/like.php",
+			url: "http://localhost/MonPortfolio/public/php/about.php",
+			data: this.state,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then((response) => {
+			//console.log(response);
+			if (response.data.status === 'success') {
+				console.log(response.data);
+				if (response.data.tabInfos) {
+					this.setState(state => {
+						return {
+							tabBdd: this.tabBdd = response.data.tabInfos,
+						};
+					});	
+				}
+                console.log(this.tabBdd[0].meta);
+			} else if (response.data.status === 'fail') {
+				console.log(response.data);
+				this.setState(state => {
+					return {
+						alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
+					};
+				});
+				this.setState(state => {
+					return {
+						warning: state.warning = 'alert alert-danger',
+					};
+				});
+                element.setAttribute('style', 'opacity:1');
+                fadeOut(element);
+			}
+		}).catch(error => {
+			;
+        })
+        
+	}
     render() {
+        const item = [];
+		if (this.tabBdd != null) {
+			for (let i = 0; i < this.tabBdd.length; i++) {
+				item.push(< Abouts key={this.tabBdd[i].id} data={{
+					about: this.tabBdd[i].about,
+					meta: this.tabBdd[i].meta,
+					title: this.tabBdd[i].title,
+				}} />)
+			}
+		}
         return (
             <div>
                 <section className="colorlib-about" data-section="about">
@@ -11,10 +96,8 @@ export default class About extends Component {
                                 <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
                                     <div className="col-md-12">
                                         <div className="about-desc">
-                                            <span className="heading-meta">A propos de moi</span>
-                                            <h2 className="colorlib-heading">Qui suis-je ?</h2>
-                                            <p></p>
                                         </div>
+                                        {item[0]}
                                     </div>
                                 </div>
                             </div>
@@ -25,12 +108,11 @@ export default class About extends Component {
                     <div className="colorlib-narrow-content">
                         <div className="row">
                             <div className="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-                                <span className="heading-meta">Ce que je fais?</span>
-                                <h2 className="colorlib-heading">HTML, CSS, Bootstrap, JavaScript, JQuery, PHP, SQL MySQL, React JS, WordPress, C++, Python</h2>
+                                {item[1]}
                             </div>
                         </div>
-                        <div className="row row-pt-md">
-                            <div className="col-md-4 text-center animate-box">
+                        <div className="row row-pt-md animate-box">
+                            <div className="col-md-4 text-center ">
                                 <div className="services color-1">
                                     <span className="icon">
                                         <i className="icon-bulb" />
@@ -41,7 +123,6 @@ export default class About extends Component {
                                     </div>
                                 </div>
                             </div>    
-
                             <div className="col-md-4 text-center animate-box">
                                 <div className="services color-2">
                                     <span className="icon">

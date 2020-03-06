@@ -18,7 +18,7 @@ export default class Blog extends Component {
         e.preventDefault();
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/like.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/like.php",
             //url: "http://localhost/MonPortfolio/public/php/news.php",
             data: this.state,
             headers: {
