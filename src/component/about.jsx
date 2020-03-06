@@ -23,6 +23,8 @@ export default class About extends Component {
 		super(props);
 		this.state = {
             id: '',
+            alert: '',
+            warning: '',
 
 		}
 		this.tabBdd = null
@@ -73,8 +75,7 @@ export default class About extends Component {
 			}
 		}).catch(error => {
 			;
-        })
-        
+        }) 
 	}
     render() {
         const item = [];
@@ -93,6 +94,7 @@ export default class About extends Component {
                     <div className="colorlib-narrow-content">
                         <div className="row">
                             <div className="col-md-12">
+                            <div id="alert" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                                 <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
                                     <div className="col-md-12">
                                         <div className="about-desc">
@@ -112,7 +114,7 @@ export default class About extends Component {
                             </div>
                         </div>
                         <div className="row row-pt-md animate-box">
-                            <div className="col-md-4 text-center ">
+                            <div className="col-md-4 text-center">
                                 <div className="services color-1">
                                     <span className="icon">
                                         <i className="icon-bulb" />
@@ -134,7 +136,6 @@ export default class About extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>

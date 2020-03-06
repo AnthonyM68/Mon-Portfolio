@@ -9,11 +9,15 @@ require_once('admin.php');
 
 $rest_json = file_get_contents("php://input");
 $datas = json_decode($rest_json, true);
- 
+
 
 if (isset($_POST)) {
-
-        $tabInfos = searchAbout($datas['id']);
+    $tabInfos = searchAbout($datas['id']);
+    if ($tabInfos) {
         $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
         echo json_encode($tab);
+    } else {
+        $tab = ['status' => 'fail', 'message' => 'no connect'];
+        echo json_encode($tab);
+    }
 }
