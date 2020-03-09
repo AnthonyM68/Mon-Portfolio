@@ -19,6 +19,7 @@ if (isset($_POST)) {
 
     } else {
         $result = recoversLikes($datas['id']);
+
         if ($result) {
             $result = $result['likes'] + $datas['count'];
             $result = updateLikes($result, $datas['id']);

@@ -101,7 +101,7 @@ if ($_SERVER['SERVER_NAME'] === "anthonym.promo-36.codeur.online") {
     if (empty($error)) {
         require_once('../../vendor/autoload.php');
 
-        $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
+        $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 465))
             ->setUsername('10d8c72cde03e7')
             ->setPassword('bb66424e01e210');
         $mailer = new Swift_Mailer($transport);

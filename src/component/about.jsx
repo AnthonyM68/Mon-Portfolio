@@ -6,7 +6,7 @@ function Abouts(props){
 
     return <div><span className="heading-meta">{props.data.meta}</span>
         <h2 className="colorlib-heading">{props.data.title}</h2>
-        <h4>{props.data.about}</h4></div>
+        <h4 className="about-desc">{props.data.about}</h4></div>
    
 }
 function fadeOut(el) {
@@ -37,11 +37,11 @@ export default class About extends Component {
 	}
 	handleClick = (e) => {
 		e.preventDefault();
-        let element = document.getElementById('alert');
+        let element = document.getElementById('alert1');
 		axios({
 			method: "POST",
-			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/like.php",
-			url: "http://localhost/MonPortfolio/public/php/about.php",
+			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
+			//url: "http://localhost/MonPortfolio/public/php/about.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export default class About extends Component {
 		}).then((response) => {
 			//console.log(response);
 			if (response.data.status === 'success') {
-				console.log(response.data);
+				
 				if (response.data.tabInfos) {
 					this.setState(state => {
 						return {
@@ -57,9 +57,8 @@ export default class About extends Component {
 						};
 					});	
 				}
-                console.log(this.tabBdd[0].meta);
 			} else if (response.data.status === 'fail') {
-				console.log(response.data);
+				
 				this.setState(state => {
 					return {
 						alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
@@ -92,9 +91,10 @@ export default class About extends Component {
             <div>
                 <section className="colorlib-about" data-section="about">
                     <div className="colorlib-narrow-content">
+
                         <div className="row">
                             <div className="col-md-12">
-                            <div id="alert" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                            <div id="alert1" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                                 <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
                                     <div className="col-md-12">
                                         <div className="about-desc">
@@ -127,6 +127,17 @@ export default class About extends Component {
                             </div>    
                             <div className="col-md-4 text-center animate-box">
                                 <div className="services color-2">
+                                    <span className="icon">
+                                        <i className="icon-settings"/>
+                                    </span>
+                                    <div className="desc">
+                                        <h3>Dévelopements d'aplications Web</h3>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-4 text-center animate-box">
+                                <div className="services color-3">
                                     <span className="icon">
                                         <i className="icon-settings"/>
                                     </span>

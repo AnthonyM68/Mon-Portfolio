@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import News from './news'
 
+function News(props){
+    return <div className="col-md-4 col-sm-6">
+            <div className="desc">
+                <span className="heading-blog"><small>{props.data.date} </small> | <small> {props.data.institute} </small> | <small> <i className="icon-bubble3" /></small></span>
+                <h3><a href="blog.html">{props.data.description}</a></h3>
+                <p className="heading-blog" >{props.data.content}</p>
+            </div>
+        </div>
+    
+}
 export default class Blog extends Component {
 	constructor(props) {
 		super(props);
@@ -18,13 +27,14 @@ export default class Blog extends Component {
         e.preventDefault();
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/like.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
             //url: "http://localhost/MonPortfolio/public/php/news.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
+         
             if (response.data.status === 'success') {
                 if (response.data.tabInfos) {
 					this.setState({ tabNews: this.tabNews = response.data.tabInfos });
