@@ -33,8 +33,8 @@ export default class Contact extends Component {
         e.preventDefault();
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/mail.php",
-            //url: "http://localhost/MonPortfolio/public/php/mail.php",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/mail.php",
+            url: "http://localhost/MonPortfolio/public/php/mail.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
@@ -124,8 +124,11 @@ export default class Contact extends Component {
                             </div>
                         </div>
                         <div className="col-md-12 text-center">
+							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
+						</div>
+                        {/*<div className="col-md-12 text-center">
                             <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
-                        </div>
+                        </div>*/}
                         <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className="form-row">
                                 <div className="form-group col-md-6">
@@ -171,7 +174,7 @@ export default class Contact extends Component {
                             </div>
                             <div className="form-row">
                                 <div className="form-group col-md-12">
-                                    <textarea className="form-control" id="message" name="message" className="textarea" placeholder="Votre message ici..."
+                                    <textarea className="form-control" id="message" placeholder="Votre message ici..."
                                         onChange={e => this.setState({ message: e.target.value })}
                                         value={this.state.message}>
                                     </textarea>
@@ -183,10 +186,7 @@ export default class Contact extends Component {
                         </form>
                     </div>
                 </section>
-
             </div>
-
-
         )
     }
 }

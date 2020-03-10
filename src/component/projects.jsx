@@ -16,19 +16,12 @@ function Project(props) {
 			<div className="desc">
 				<div className="con">
 					<h3>{props.data.title}</h3>
-					<span>{props.data.categories}</span>
-					<span>{props.data.type}</span>
+					<span className="subtitle">{props.data.categories}</span>
+					<span className="subtitle">{props.data.type}</span>
 					<p className="icon">
 						<span><a className="picto-item" aria-label="Partagez sur vos réseaux sociaux" href={`https://www.linkedin.com/sharing/share-offsite/?url=https://anthonym.promo-36.codeur.online/${props.data.title}`} target="_blank" rel="noopener noreferrer"><i className="icon-share3" /></a></span>
-						<span>
-							<a className="picto-item" aria-label="Découvrez le projet de développement" href={`https://anthonym.promo-36.codeur.online/${props.data.title}`} target="_blank" rel="noopener noreferrer">
-								<i className="icon-eye" />
-							</a></span>
-						<span>
-							<a className="picto-item" aria-label="Likez pour encourager" onClick={(e) => props.data.handleClick(e)}>
-								<i id={props.data.project} className="icon-heart" />{props.data.likes}
-							</a>
-						</span>
+						<span><a className="picto-item" aria-label="Découvrez le projet de développement" href={`https://anthonym.promo-36.codeur.online/${props.data.title}`} target="_blank" rel="noopener noreferrer"><i className="icon-eye" /></a></span>
+						<span><a className="picto-item" aria-label="Likez pour encourager" onClick={(e) => props.data.handleClick(e)}><i id={props.data.project} className="icon-heart" />{props.data.likes}</a></span>
 					</p>
 				</div>
 			</div>
@@ -71,8 +64,8 @@ export default class Projects extends Component {
 		//console.log(this.state)
 		axios({
 			method: "POST",
-			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
-			//url: "http://localhost/MonPortfolio/public/php/project.php",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
+			url: "http://localhost/MonPortfolio/public/php/project.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -131,8 +124,11 @@ export default class Projects extends Component {
 							</div>
 						</div>
 						<div className="col-md-12 text-center">
-							<div id="alerte4" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
 						</div>
+						{/*<div className="col-md-12 text-center">
+							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
+						</div>*/}
 						<div className="row animate-box" data-animate-effect="fadeInLeft">
 							{item}
 						</div>
@@ -141,5 +137,4 @@ export default class Projects extends Component {
 			</div>
 		)
 	}
-
 }

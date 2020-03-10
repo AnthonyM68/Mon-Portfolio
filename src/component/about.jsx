@@ -40,8 +40,8 @@ export default class About extends Component {
         let element = document.getElementById('alert1');
 		axios({
 			method: "POST",
-			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
-			//url: "http://localhost/MonPortfolio/public/php/about.php",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
+			url: "http://localhost/MonPortfolio/public/php/about.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
@@ -91,10 +91,12 @@ export default class About extends Component {
             <div>
                 <section className="colorlib-about" data-section="about">
                     <div className="colorlib-narrow-content">
-
                         <div className="row">
-                            <div className="col-md-12">
-                            <div id="alert1" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                        <div className="col-md-12 text-center">
+							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
+						</div>
+                        
+                            
                                 <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
                                     <div className="col-md-12">
                                         <div className="about-desc">
@@ -102,7 +104,7 @@ export default class About extends Component {
                                         {item[0]}
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </section>

@@ -27,8 +27,8 @@ export default class Blog extends Component {
         e.preventDefault();
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
-            //url: "http://localhost/MonPortfolio/public/php/news.php",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
+            url: "http://localhost/MonPortfolio/public/php/news.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
@@ -67,6 +67,9 @@ export default class Blog extends Component {
 					<h2 className="colorlib-heading">Blog récent</h2>
 					</div>
 				</div>
+                <div className="col-md-12 text-center">
+							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
+						</div>
 				<div className="row animate-box" data-animate-effect="fadeInLeft">
 					{item}
 				</div>

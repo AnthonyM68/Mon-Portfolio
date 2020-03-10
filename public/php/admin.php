@@ -5,7 +5,13 @@ $options = [
 ];
 $pdo = new PDO('mysql:host=' . $host . ';dbname=' . $dbname, $user, $pass, $options);
 
-
+function searchTimeline()
+{
+   global $pdo;
+   $req = $pdo->prepare('SELECT * FROM timeline');
+   $req->execute();
+   return $req->fetchAll();
+}
 function searchNews()
 {
    global $pdo;
