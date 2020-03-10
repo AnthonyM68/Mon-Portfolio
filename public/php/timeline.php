@@ -18,7 +18,7 @@ if (isset($_POST)) {
         echo json_encode($tab);
 
     } else {
-        $result = recoversLikes($datas['id']);
+
 
         if ($result) {
             $result = $result['likes'] + $datas['count'];

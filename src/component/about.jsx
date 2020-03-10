@@ -93,8 +93,8 @@ export default class About extends Component {
                     <div className="colorlib-narrow-content">
                         <div className="row">
                         <div className="col-md-12 text-center">
-							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
-						</div>
+                            <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                        </div>
                         
                             
                                 <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">

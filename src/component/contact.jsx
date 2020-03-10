@@ -124,11 +124,8 @@ export default class Contact extends Component {
                             </div>
                         </div>
                         <div className="col-md-12 text-center">
-							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
-						</div>
-                        {/*<div className="col-md-12 text-center">
                             <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
-                        </div>*/}
+                        </div>
                         <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className="form-row">
                                 <div className="form-group col-md-6">

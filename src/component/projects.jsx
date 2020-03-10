@@ -124,11 +124,8 @@ export default class Projects extends Component {
 							</div>
 						</div>
 						<div className="col-md-12 text-center">
-							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
-						</div>
-						{/*<div className="col-md-12 text-center">
-							<div id="alerte4" className="alert alert-warning"><strong>alert</strong></div>
-						</div>*/}
+                            <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                        </div>
 						<div className="row animate-box" data-animate-effect="fadeInLeft">
 							{item}
 						</div>
