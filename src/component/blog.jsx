@@ -11,6 +11,17 @@ function News(props){
         </div>
     
 }
+function fadeOut(el) {
+    console.log(el);
+    var tick = function () {
+        console.log(el);
+        el.style.opacity = +el.style.opacity - 0.02;
+        if (+el.style.opacity > 0) {
+            setTimeout(tick, 80)
+        }
+    };
+    tick();
+}
 export default class Blog extends Component {
 	constructor(props) {
 		super(props);
@@ -25,10 +36,11 @@ export default class Blog extends Component {
     }
     handleClick = (e) => {
         e.preventDefault();
+        let element = document.getElementById('alerte4');
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
-            url: "http://localhost/MonPortfolio/public/php/news.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
+            //url: "http://localhost/MonPortfolio/public/php/news.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +54,21 @@ export default class Blog extends Component {
             } else if (response.data.status === 'fail') {
             }
         }).catch(error => {
-            ;
+            if (error.message === 'Network Error'){
+                error = "Erreur de réseau"
+            }
+            this.setState(state => {
+                return {
+                    alert: state.alert = error,
+                };
+            });
+            this.setState(state => {
+                return {
+                    warning: state.warning = 'alert alert-danger',
+                };
+            });
+            element.setAttribute('style', 'opacity:1');
+            fadeOut(element);
         })
     }
   render() {
@@ -68,7 +94,7 @@ export default class Blog extends Component {
 					</div>
 				</div>
                 <div className="col-md-12 text-center">
-                            <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                            <div id="alerte4" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                         </div>
 				<div className="row animate-box" data-animate-effect="fadeInLeft">
 					{item}

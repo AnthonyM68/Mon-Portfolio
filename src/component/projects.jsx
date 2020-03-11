@@ -39,7 +39,6 @@ export default class Projects extends Component {
 		}
 		this.tabBdd = null
 	}
-	
 	componentDidMount() {
 		window.addEventListener('load', this.handleLoad);
 	}
@@ -48,7 +47,7 @@ export default class Projects extends Component {
 	}
 	handleClick = (e) => {
 		e.preventDefault();
-
+		let element = document.getElementById('alerte3');
 		this.setState(state => {
 			return {
 				count: state.count = 1,
@@ -66,14 +65,13 @@ export default class Projects extends Component {
 		//console.log(this.state)
 		axios({
 			method: "POST",
-			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
-			url: "http://localhost/MonPortfolio/public/php/project.php",
+			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
+			//url: "http://localhost/MonPortfolio/public/php/project.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		}).then((response) => {
-			let element = document.getElementById('alerte4');
 			if (response.data.status == 'success') {
 				this.setState(state => {
 					return {
@@ -95,7 +93,21 @@ export default class Projects extends Component {
 				fadeOut(element);
 			}
 		}).catch(error => {
-			;
+			if (error.message === 'Network Error'){
+                error = "Erreur de réseau"
+            }
+            this.setState(state => {
+                return {
+                    alert: state.alert = error,
+                };
+            });
+            this.setState(state => {
+                return {
+                    warning: state.warning = 'alert alert-danger',
+                };
+            });
+            element.setAttribute('style', 'opacity:1');
+            fadeOut(element);
 		})
 	}
 	render() {
@@ -125,7 +137,7 @@ export default class Projects extends Component {
 							</div>
 						</div>
 						<div className="col-md-12 text-center">
-                            <div id="alerte4" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                            <div id="alerte3" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                         </div>
 						<div className="row animate-box" data-animate-effect="fadeInLeft">
 							{item}

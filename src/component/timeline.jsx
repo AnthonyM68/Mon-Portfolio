@@ -45,6 +45,7 @@ export default class Timeline extends Component {
   }
   handleClick = (e) => {
     e.preventDefault();
+    let element = document.getElementById('alerte2');
     this.setState(state => {
       return {
         count: state.count = 1,
@@ -59,18 +60,15 @@ export default class Timeline extends Component {
     } else {
       this.setState({ id: this.state.id = e.target.id });
     }
-    //console.log(this.state)
     axios({
       method: "POST",
-     // url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
-      url: "http://localhost/MonPortfolio/public/php/timeline.php",
+      url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
+      //url: "http://localhost/MonPortfolio/public/php/timeline.php",
       data: this.state,
       headers: {
         'Content-Type': 'application/json'
       }
     }).then((response) => {
-      //console.log(response);
-      let element = document.getElementById('alerte3');
       if (response.data.status == 'success') {
         this.setState(state => {
           return {
@@ -78,7 +76,6 @@ export default class Timeline extends Component {
           };
         });
       } else if (response.data.status === 'fail') {
-        //console.log(response.data);
         this.setState(state => {
           return {
             alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
@@ -94,7 +91,21 @@ export default class Timeline extends Component {
 
       }
     }).catch(error => {
-      ;
+      if (error.message === 'Network Error') {
+        error = "Erreur de réseau"
+      }
+      this.setState(state => {
+        return {
+          alert: state.alert = error,
+        };
+      });
+      this.setState(state => {
+        return {
+          warning: state.warning = 'alert alert-danger',
+        };
+      });
+      element.setAttribute('style', 'opacity:1');
+      fadeOut(element);
     })
   }
   render() {
@@ -120,7 +131,7 @@ export default class Timeline extends Component {
               </div>
             </div>
             <div className="col-md-12 text-center">
-              <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+              <div id="alerte2" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
             </div>
             <div className="row">
               <div className="col-md-12">

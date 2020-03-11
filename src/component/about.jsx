@@ -3,11 +3,9 @@ import axios from 'axios'
 
 
 function Abouts(props) {
-
     return <div><span className="heading-meta">{props.data.meta}</span>
         <h2 className="colorlib-heading">{props.data.title}</h2>
         <h4 className="about-desc">{props.data.about}</h4></div>
-
 }
 function fadeOut(el) {
     var tick = function () {
@@ -36,19 +34,17 @@ export default class About extends Component {
     }
     handleClick = (e) => {
         e.preventDefault();
-        let element = document.getElementById('alert1');
+        let element = document.getElementById('alerte1');
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
-            url: "http://localhost/MonPortfolio/public/php/about.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
+            //url: "http://localhost/MonPortfolio/public/php/about.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            //console.log(response);
             if (response.data.status === 'success') {
-
                 if (response.data.tabInfos) {
                     this.setState(state => {
                         return {
@@ -57,7 +53,7 @@ export default class About extends Component {
                     });
                 }
             } else if (response.data.status === 'fail') {
-
+                console.log(response)
                 this.setState(state => {
                     return {
                         alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
@@ -72,7 +68,21 @@ export default class About extends Component {
                 fadeOut(element);
             }
         }).catch(error => {
-            ;
+            if (error.message === 'Network Error'){
+                error = "Erreur de réseau"
+            }
+            this.setState(state => {
+                return {
+                    alert: state.alert = error,
+                };
+            });
+            this.setState(state => {
+                return {
+                    warning: state.warning = 'alert alert-danger',
+                };
+            });
+            element.setAttribute('style', 'opacity:1');
+            fadeOut(element);
         })
     }
     render() {
@@ -92,7 +102,7 @@ export default class About extends Component {
                     <div className="colorlib-narrow-content">
                         <div className="row">
                             <div className="col-md-12 text-center">
-                                <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                                <div id="alerte1" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                             </div>
                             <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
                                 <div className="col-md-12">

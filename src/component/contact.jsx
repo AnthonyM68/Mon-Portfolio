@@ -31,17 +31,16 @@ export default class Contact extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
+        let element = document.getElementById('alerte5');
         axios({
             method: "POST",
-            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/mail.php",
-            url: "http://localhost/MonPortfolio/public/php/mail.php",
+            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/mail.php",
+            //url: "http://localhost/MonPortfolio/public/php/mail.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            console.log(response);
-            let element = document.getElementById('alerte6');
             if (response.data.status === 'success') {
                 let styleResponse = [];
                 this.setState(state => {
@@ -57,7 +56,6 @@ export default class Contact extends Component {
                 );
                 for (let i = 0; i < response.data.message.length; i++) {
                     styleResponse[i].value = "";
-                    // styleResponse[i].setAttribute('style', '');
                 }
             } else if (response.data.status === 'fail') {
        
@@ -72,11 +70,8 @@ export default class Contact extends Component {
                             warning: state.warning = 'alert alert-danger',
                         };
                     });
-
                     element.setAttribute('style', 'opacity:1');
                     fadeOut(element);
-
-
                 } else if (response.data.message === 'senderror') {
                     this.setState(state => {
                         return {
@@ -105,7 +100,21 @@ export default class Contact extends Component {
                 }
             }
         }).catch(error => {
-            console.log(error);
+            if (error.message === 'Network Error'){
+                error = "Erreur de réseau"
+            }
+            this.setState(state => {
+                return {
+                    alert: state.alert = error,
+                };
+            });
+            this.setState(state => {
+                return {
+                    warning: state.warning = 'alert alert-danger',
+                };
+            });
+            element.setAttribute('style', 'opacity:1');
+            fadeOut(element);
         })
     }
     render() {
@@ -120,7 +129,7 @@ export default class Contact extends Component {
                             </div>
                         </div>
                         <div className="col-md-12 text-center">
-                            <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                            <div id="alerte5" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                         </div>
                         <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className="form-row">
