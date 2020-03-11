@@ -62,14 +62,14 @@ export default class Timeline extends Component {
     //console.log(this.state)
     axios({
       method: "POST",
-      //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
+     // url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
       url: "http://localhost/MonPortfolio/public/php/timeline.php",
       data: this.state,
       headers: {
         'Content-Type': 'application/json'
       }
     }).then((response) => {
-      console.log(response);
+      //console.log(response);
       let element = document.getElementById('alerte3');
       if (response.data.status == 'success') {
         this.setState(state => {
@@ -109,7 +109,6 @@ export default class Timeline extends Component {
         }} />)
       }
     }
-    console.log(item);
     return (
       <div>
         <section className="colorlib-experience" data-section="timeline">

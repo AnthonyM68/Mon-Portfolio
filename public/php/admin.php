@@ -5,10 +5,26 @@ $options = [
 ];
 $pdo = new PDO('mysql:host=' . $host . ';dbname=' . $dbname, $user, $pass, $options);
 
+
+function searchAbout()
+{
+   global $pdo;
+   $req = $pdo->prepare('SELECT * FROM about');
+   $req->execute();
+   return $req->fetchAll();
+}
+
 function searchTimeline()
 {
    global $pdo;
    $req = $pdo->prepare('SELECT * FROM timeline');
+   $req->execute();
+   return $req->fetchAll();
+}
+function searchProjects()
+{
+   global $pdo;
+   $req = $pdo->prepare('SELECT * FROM mylikes');
    $req->execute();
    return $req->fetchAll();
 }
@@ -19,13 +35,7 @@ function searchNews()
    $req->execute();
    return $req->fetchAll();
 }
-function search()
-{
-   global $pdo;
-   $req = $pdo->prepare('SELECT * FROM mylikes');
-   $req->execute();
-   return $req->fetchAll();
-}
+
 function recoversLikes($project)
 {
    global $pdo;
@@ -45,11 +55,4 @@ function mailbdd($email, $last_name, $first_name, $adress, $city, $postal_code, 
    global $pdo;
    $req = $pdo->prepare('INSERT INTO mail (email, last_name, first_name, adress, city, postal_code, phone, content) VALUE (?, ?, ?, ?, ?, ?, ?, ?) ');
    return $req->execute([$email, $last_name, $first_name, $adress, $city, $postal_code, $phone, $message]);
-}
-function searchAbout()
-{
-   global $pdo;
-   $req = $pdo->prepare('SELECT * FROM about');
-   $req->execute();
-   return $req->fetchAll();
 }

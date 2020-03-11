@@ -39,6 +39,7 @@ export default class Projects extends Component {
 		}
 		this.tabBdd = null
 	}
+	
 	componentDidMount() {
 		window.addEventListener('load', this.handleLoad);
 	}
@@ -47,6 +48,7 @@ export default class Projects extends Component {
 	}
 	handleClick = (e) => {
 		e.preventDefault();
+
 		this.setState(state => {
 			return {
 				count: state.count = 1,
@@ -79,10 +81,9 @@ export default class Projects extends Component {
 					};
 				});
 			} else if (response.data.status === 'fail') {
-				//console.log(response.data);
 				this.setState(state => {
 					return {
-						alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
+						alert: state.alert = 'Une erreur inattendue s\'est produite avec la base de données',
 					};
 				});
 				this.setState(state => {
@@ -92,13 +93,13 @@ export default class Projects extends Component {
 				});
 				element.setAttribute('style', 'opacity:1');
 				fadeOut(element);
-
 			}
 		}).catch(error => {
 			;
 		})
 	}
 	render() {
+		
 		const item = [];
 		if (this.tabBdd != null) {
 			for (let i = 0; i < this.tabBdd.length; i++) {
@@ -124,7 +125,7 @@ export default class Projects extends Component {
 							</div>
 						</div>
 						<div className="col-md-12 text-center">
-                            <div id="alerte6" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
+                            <div id="alerte4" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                         </div>
 						<div className="row animate-box" data-animate-effect="fadeInLeft">
 							{item}

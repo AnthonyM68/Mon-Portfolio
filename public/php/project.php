@@ -9,13 +9,18 @@ require_once('admin.php');
 
 $rest_json = file_get_contents("php://input");
 $datas = json_decode($rest_json, true);
- 
+
 
 if (isset($_POST)) {
     if ($datas['id'] === 'search') {
-        $tabInfos = search();
-        $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
-        echo json_encode($tab);
+        $tabInfos = searchProjects();
+        if(!empty($tabInfos) && is_array($tabInfos)){
+            $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
+            echo json_encode($tab);
+        } else {
+            $tab = ['status' => 'fail'];
+            echo json_encode($tab);
+        }
 
     } else {
         $result = recoversLikes($datas['id']);
@@ -25,7 +30,7 @@ if (isset($_POST)) {
             $result = updateLikes($result, $datas['id']);
 
             if ($result) {
-                $tabInfos = search();
+                $tabInfos = searchProjects();
                 $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
                 echo json_encode($tab);
             } else {

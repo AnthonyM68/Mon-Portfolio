@@ -43,7 +43,6 @@ export default class Contact extends Component {
             console.log(response);
             let element = document.getElementById('alerte6');
             if (response.data.status === 'success') {
-                
                 let styleResponse = [];
                 this.setState(state => {
                     return {
@@ -53,7 +52,6 @@ export default class Contact extends Component {
                 });
                 element.setAttribute('style', 'opacity:1');
                 fadeOut(element);
-
                 response.data.message.forEach(element =>
                     styleResponse.push(document.getElementById(element))
                 );
@@ -61,8 +59,6 @@ export default class Contact extends Component {
                     styleResponse[i].value = "";
                     // styleResponse[i].setAttribute('style', '');
                 }
-                
-
             } else if (response.data.status === 'fail') {
        
                 if (response.data.message === 'bdd') {
