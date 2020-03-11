@@ -62,8 +62,8 @@ export default class Timeline extends Component {
     }
     axios({
       method: "POST",
-      url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
-      //url: "http://localhost/MonPortfolio/public/php/timeline.php",
+      //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
+      url: "http://localhost/MonPortfolio/public/php/timeline.php",
       data: this.state,
       headers: {
         'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ export default class Timeline extends Component {
           <div className="colorlib-narrow-content">
             <div className="row">
               <div className="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-                <span className="heading-meta">Parcourt</span>
+                <span className="heading-meta">Parcours</span>
                 <h2 className="colorlib-heading animate-box">Chronologie</h2>
               </div>
             </div>

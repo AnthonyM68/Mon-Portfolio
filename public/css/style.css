@@ -395,6 +395,7 @@ figure figcaption {
   min-height: 700px;
   padding: 2.5em;
   position: relative;
+  
 }
 
 @media screen and (max-width: 768px) {
@@ -2099,4 +2100,10 @@ input[type=email] {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+.vanta {
+  min-height: 800px;
+  width:100%;
+
 }

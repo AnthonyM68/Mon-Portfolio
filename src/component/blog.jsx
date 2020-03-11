@@ -39,8 +39,8 @@ export default class Blog extends Component {
         let element = document.getElementById('alerte4');
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
-            //url: "http://localhost/MonPortfolio/public/php/news.php",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/news.php",
+            url: "http://localhost/MonPortfolio/public/php/news.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'

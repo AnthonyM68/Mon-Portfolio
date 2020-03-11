@@ -128,7 +128,7 @@ export default class About extends Component {
                                         <i className="icon-bulb" />
                                     </span>
                                     <div className="desc">
-                                        <h3>Développements Web</h3>
+                                        <h3>Développement Web</h3>
                                         <p></p>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@ export default class About extends Component {
                                         <i className="icon-settings" />
                                     </span>
                                     <div className="desc">
-                                        <h3>Dévelopements d'aplications Web</h3>
+                                        <h3>Dévelopement d'application Web</h3>
                                         <p></p>
                                     </div>
                                 </div>
