@@ -5,15 +5,13 @@ function News(props) {
     return <div className="col-md-4 col-sm-6">
         <div className="desc">
             <span className="heading-blog"><small>{props.data.date} </small> | <small> {props.data.institute} </small> | <small> <i className="icon-bubble3" /></small></span>
-            <h3><a href="blog.html">{props.data.description}</a></h3>
+            <h3><a href={`${props.data.certificate}`}>{props.data.description}</a></h3>
             <p className="heading-blog" >{props.data.content}</p>
         </div>
     </div>
 }
 function fadeOut(el) {
-    console.log(el);
     var tick = function () {
-        console.log(el);
         el.style.opacity = +el.style.opacity - 0.02;
         if (+el.style.opacity > 0) {
             setTimeout(tick, 80)
@@ -45,12 +43,23 @@ export default class Blog extends Component {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-
             if (response.data.status === 'success') {
                 if (response.data.tabInfos) {
                     this.setState({ tabNews: this.tabNews = response.data.tabInfos });
                 }
             } else if (response.data.status === 'fail') {
+                this.setState(state => {
+                    return {
+                        alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',
+                    };
+                });
+                this.setState(state => {
+                    return {
+                        warning: state.warning = 'alert alert-danger',
+                    };
+                });
+                element.setAttribute('style', 'opacity:1');
+                fadeOut(element);
             }
         }).catch(error => {
             if (error.message === 'Network Error') {
@@ -79,6 +88,7 @@ export default class Blog extends Component {
                     institute: this.tabNews[i].institute,
                     description: this.tabNews[i].description,
                     content: this.tabNews[i].content,
+                    certificate: this.tabNews[i].certificate,
                 }} />)
             }
         }

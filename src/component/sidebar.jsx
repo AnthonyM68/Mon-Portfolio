@@ -8,12 +8,16 @@ export default class Sidebar extends Component {
         <aside id="colorlib-aside" className="border js-fullheight">
           <div className="text-center">
             <div className="author-img thumbnail" style={{ backgroundImage: 'url(images/MA.PNG)' }} />
-            <h1 id="colorlib-logo"><a href="index.html">Anthony Montmirail</a></h1>
-            <span className="email heading"><i className="icon-mail"></i>montmirail.a@codeur.online</span>
+            <h1 id="colorlib-logo">
+              <a href="https://www.linkedin.com/in/anthony-montmirail/">Anthony Montmirail</a></h1>
           </div>
           <nav id="colorlib-main-menu" role="navigation" className="navbar">
             <div id="navbar" className="collapse">
               <ul>
+                <li>
+                  <i className="icon-mail"></i>
+                  <a href="#contact" data-nav-section="contact"> montmirail.a@codeur.online</a>
+                </li>
                 <li className="active"><a href="#home" data-nav-section="home">Introduction</a></li>
                 <li><a href="#about" data-nav-section="about">Description</a></li>
                 <li><a href="#timeline" data-nav-section="timeline">Chronologie</a></li>
@@ -37,11 +41,11 @@ export default class Sidebar extends Component {
                 Développer avec <i className="icon-heart" aria-hidden="true" /> et React Js
               </small>
             </span>
-                <ul>
-                  <li>
-                    <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer">Background Vanta.waves.js</a>
-                  </li>
-                </ul>
+            <ul>
+              <li>
+                <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer">Background <span className="globe">Vanta.globe.js</span></a>
+              </li>
+            </ul>
           </div>
         </aside>
       </div>

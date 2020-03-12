@@ -99,7 +99,7 @@ export default class Contact extends Component {
                 }
             }
         }).catch(error => {
-            if (error.message === 'Network Error'){
+            if (error.message === 'Network Error') {
                 error = "Erreur de réseau"
             }
             this.setState(state => {
@@ -119,18 +119,20 @@ export default class Contact extends Component {
     render() {
         return (
             <div>
+                
                 <section className="colorlib-form" data-section="contact">
                     <div className="colorlib-narrow-content">
                         <div className="row">
-                            <div className="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-                                <span className="heading-meta">Contact</span>
-                                <h2 className="colorlib-heading">Formulaire de contact</h2>
+                            <div className="col-md-12 col-md-offset-12 col-md-pull-12 animate-box" >
+                                <span className="heading-meta text-center">Contact</span>
+                                <h2 className="colorlib-heading text-center">Formulaire de contact</h2>
                             </div>
                         </div>
                         <div className="col-md-12 text-center">
                             <div id="alerte5" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                         </div>
-                        <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
+                        <div className="container" id="container-contact">
+                        <form id="contact-form" className="" onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className="form-row">
                                 <div className="form-group col-md-6">
                                     <input type="email"
@@ -185,6 +187,7 @@ export default class Contact extends Component {
                                 <button type="submit" className="btn btn-secondary message">Soumettre</button>
                             </div>
                         </form>
+                        </div>
                     </div>
                 </section>
             </div>
