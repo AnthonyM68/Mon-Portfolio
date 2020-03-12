@@ -17,7 +17,7 @@ if (isset($_POST)) {
         $tab = ['status' => 'success', 'tabInfos' => $tabInfos];
         echo json_encode($tab);
     } else {
-        $tab = ['status' => 'fail', 'message' => 'no connect'];
+        $tab = ['status' => 'fail'];
         echo json_encode($tab);
     }
 }

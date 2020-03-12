@@ -53,7 +53,6 @@ export default class About extends Component {
                     });
                 }
             } else if (response.data.status === 'fail') {
-                console.log(response)
                 this.setState(state => {
                     return {
                         alert: state.alert = 'une erreur inattendue s\'est produite avec la base de données',

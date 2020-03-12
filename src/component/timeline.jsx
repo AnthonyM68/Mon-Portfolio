@@ -62,8 +62,8 @@ export default class Timeline extends Component {
     }
     axios({
       method: "POST",
-      //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
-      url: "http://localhost/MonPortfolio/public/php/timeline.php",
+      url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/timeline.php",
+      //url: "http://localhost/MonPortfolio/public/php/timeline.php",
       data: this.state,
       headers: {
         'Content-Type': 'application/json'

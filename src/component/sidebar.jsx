@@ -32,11 +32,16 @@ export default class Sidebar extends Component {
             </ul>
           </nav>
           <div className="colorlib-footer">
-            <p><small>
-              Développer avec <i className="icon-heart" aria-hidden="true" /> et React Js
-              </small></p>
-            <p><small>
-            </small></p>
+            <span>
+              <small>
+                Développer avec <i className="icon-heart" aria-hidden="true" /> et React Js
+              </small>
+            </span>
+                <ul>
+                  <li>
+                    <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer">Background Vanta.waves.js</a>
+                  </li>
+                </ul>
           </div>
         </aside>
       </div>
