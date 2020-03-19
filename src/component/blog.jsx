@@ -5,7 +5,7 @@ function News(props) {
     return <div className="col-md-4 col-sm-6">
         <div className="desc">
             <span className="heading-blog"><small>{props.data.date} </small> | <small> {props.data.institute} </small> | <small> <i className="icon-bubble3" /></small></span>
-            <h3><a href={`${props.data.certificate}`}>{props.data.description}</a></h3>
+            <h3><a href={`${props.data.certificate}`} target="_blank" rel="noopener noreferrer">{props.data.description}</a></h3>
             <p className="heading-blog" >{props.data.content}</p>
         </div>
     </div>

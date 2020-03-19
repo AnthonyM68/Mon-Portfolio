@@ -7,7 +7,7 @@ import Projects from './component/projects'
 import Timeline from './component/timeline'
 import Blog from './component/blog'
 import Contact from './component/contact'
-import Vanta from './component/introduction'
+import Introduction from './component/introduction'
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <div id="container-wrap">
          <Sidebar></Sidebar>
       <div id="colorlib-main">
-        <Vanta></Vanta>
+        <Introduction></Introduction>
         <About></About>
         <Timeline></Timeline>
         <Projects></Projects>

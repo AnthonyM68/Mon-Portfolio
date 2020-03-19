@@ -16,7 +16,7 @@ export default class Sidebar extends Component {
               <ul>
                 <li>
                   <i className="icon-mail"></i>
-                  <a href="#contact" data-nav-section="contact"> montmirail.a@codeur.online</a>
+                  <a href="#contact" data-nav-section="contact" className="text-mail"> montmirail.a@codeur.online</a>
                 </li>
                 <li className="active"><a href="#home" data-nav-section="home">Introduction</a></li>
                 <li><a href="#about" data-nav-section="about">Description</a></li>
@@ -27,7 +27,7 @@ export default class Sidebar extends Component {
               </ul>
             </div>
           </nav>
-          <nav id="colorlib-main-menu">
+          <nav id="colorlib-main-menu-contact">
             <ul>
               <li><a href="https://www.linkedin.com/in/anthony-montmirail/" target="_blank" rel="noopener noreferrer"><i className="icon-linkedin2" /></a></li>
               <li><a href="https://github.com/AnthonyM68" target="_blank" rel="noopener noreferrer"><i className="icon-github"></i></a></li>
@@ -43,7 +43,7 @@ export default class Sidebar extends Component {
             </span>
             <ul>
               <li>
-                <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer">Background <span className="globe">Vanta.globe.js</span></a>
+                <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer">Background <span className="globe">Vanta.js</span></a>
               </li>
             </ul>
           </div>

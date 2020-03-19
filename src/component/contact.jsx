@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 function fadeOut(el) {
-    console.log(el);
     var tick = function () {
-        console.log(el);
         el.style.opacity = +el.style.opacity - 0.02;
         if (+el.style.opacity > 0) {
             setTimeout(tick, 80)
@@ -93,8 +91,8 @@ export default class Contact extends Component {
                     styleResponse[i].value = "Champ vide";
                     styleResponse[i].setAttribute('style', 'background-color: #f2dede;color: #a94442;');
                     styleResponse[i].addEventListener('click', function () {
-                        styleResponse[i].value = '';
-                        styleResponse[i].setAttribute('style', '');
+                    styleResponse[i].value = '';
+                    styleResponse[i].setAttribute('style', '');
                     })
                 }
             }
@@ -119,7 +117,6 @@ export default class Contact extends Component {
     render() {
         return (
             <div>
-                
                 <section className="colorlib-form" data-section="contact">
                     <div className="colorlib-narrow-content">
                         <div className="row">
