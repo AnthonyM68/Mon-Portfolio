@@ -59,13 +59,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .colorlib-nav-toggle.active i::before, .colorlib-nav-toggle.active i::after {
-
+  background-color: #fff;
   border:1px solid #fff;
 }
 
 .colorlib-nav-toggle.dark.active i::before, .colorlib-nav-toggle.dark.active i::after {
-  background: #000;
-
+  background: #fff;
 }
 
 .colorlib-nav-toggle:hover, .colorlib-nav-toggle:focus, .colorlib-nav-toggle:active {
@@ -105,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .colorlib-nav-toggle.dark i {
   position: relative;
-  color: #000;
+  color: #fff;
   background: #fff;
   -webkit-transition: all .2s ease-out;
   -o-transition: all .2s ease-out;
@@ -113,7 +112,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .colorlib-nav-toggle.dark i::before, .colorlib-nav-toggle.dark i::after {
-  background: #000;
   -webkit-transition: 0.2s;
   -o-transition: 0.2s;
   transition: 0.2s;
@@ -138,8 +136,10 @@ h1, h2, h3, h4, h5, h6 {
 .colorlib-nav-toggle.active i {
   background: transparent;
 }
-
+/********croix**********/
 .colorlib-nav-toggle.active i::before {
+
+
   top: 0;
   -webkit-transform: rotateZ(45deg);
   -moz-transform: rotateZ(45deg);
@@ -149,6 +149,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .colorlib-nav-toggle.active i::after {
+
+
   bottom: 0;
   -webkit-transform: rotateZ(-45deg);
   -moz-transform: rotateZ(-45deg);
@@ -309,9 +311,7 @@ h1, h2, h3, h4, h5, h6 {
 #colorlib-aside #colorlib-main-menu ul {
   text-align: center;
   margin: 0;
-  padding: 0;
-  border:1px solid blue;
-  
+  padding: 0; 
 }
 
 
@@ -326,7 +326,6 @@ h1, h2, h3, h4, h5, h6 {
 @media screen and (max-width: 768px) {
   #colorlib-aside #colorlib-main-menu ul {
     margin: 0 0 1em 0; 
-    border:1px solid blue;
   }
 
 }
@@ -422,6 +421,24 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /******menus latéral gauche******/
 #colorlib-aside #colorlib-main-menu-contact {
   display: block;
@@ -429,21 +446,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #colorlib-aside #colorlib-main-menu-contact .collapse {
-  display: block !important;
+  /*display: block !important;*/
 }
 
 #colorlib-aside #colorlib-main-menu-contact ul {
   text-align: center;
   margin: 0;
   padding: 0;
-  border:1px solid blue;
-  
 }
 
 @media screen and (max-width: 768px) {
   #colorlib-aside #colorlib-main-menu-contact ul {
     margin: 0 0 1em 0; 
-    border:1px solid blue;
   }
 
 }
@@ -528,6 +542,28 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px;
   width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

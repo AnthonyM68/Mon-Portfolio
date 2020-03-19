@@ -171,9 +171,9 @@ export default class Introduction extends React.Component {
                 </div>
               </li>
             </ul>
-          </div></div>
+          </div>
           <div className="row" id="select-background">
-        
+        </div>
         <div id="selector" className="row text-right">
           <form id="myform" onSubmit={this.handleFormSubmit}>
             <div className="radio">

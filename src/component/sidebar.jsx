@@ -41,11 +41,9 @@ export default class Sidebar extends Component {
                 Développer avec <i className="icon-heart" aria-hidden="true" /> et React Js
               </small>
             </span>
-            <ul>
-              <li>
-                <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer">Background <span className="globe">Vanta.js</span></a>
-              </li>
-            </ul>
+            <small>
+                <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer" className="globe">Background Vanta.js</a>
+              </small>
           </div>
         </aside>
       </div>
