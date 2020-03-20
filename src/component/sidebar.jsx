@@ -35,15 +35,15 @@ export default class Sidebar extends Component {
               <li><a href="https://twitter.com/68Logic" target="_blank" rel="noopener noreferrer"><i className="icon-twitter2" /></a></li>
             </ul>
           </nav>
-          <div className="colorlib-footer">
-            <span>
-              <small>
+          <div id="colorlib-footer">
+            <ul>
+              <li>
                 Développer avec <i className="icon-heart" aria-hidden="true" /> et React Js
-              </small>
-            </span>
-            <small>
+              </li>
+              <li>
                 <a href="https://github.com/tengbao" target="_blank" rel="noopener noreferrer" className="globe">Background Vanta.js</a>
-              </small>
+              </li>
+            </ul>
           </div>
         </aside>
       </div>

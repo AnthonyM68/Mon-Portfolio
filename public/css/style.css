@@ -18,6 +18,7 @@ body {
 @media screen and (max-width: 992px) {
   body {
     font-size: 16px;
+    padding:10px;
   }
 }
 
@@ -402,14 +403,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: scaleX(1);
 }
 
-#colorlib-aside .colorlib-footer {
-  font-size: 18px;
-  text-align: center;
-  font-weight: 400;
-  color: #fff;
-  padding: 0 20px;
-  width: 100%;
-}
+
 
 
 
@@ -509,7 +503,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #colorlib-aside #colorlib-main-menu-contact ul li a:hover {
   text-decoration: none;
-  color: #AAAAAA;
+  color: #000;
 }
 
 #colorlib-aside #colorlib-main-menu-contact ul li a:hover:after {
@@ -534,7 +528,12 @@ h1, h2, h3, h4, h5, h6 {
   transform: scaleX(1);
 }
 
-#colorlib-aside .colorlib-footer {
+/****************lien vanta****************/
+/******menus latéral gauche******/
+
+/*****effets de soulignements*******/
+
+#colorlib-footer {
   font-size: 18px;
   text-align: center;
   font-weight: 400;
@@ -542,10 +541,62 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px;
   width: 100%;
 }
+#colorlib-footer .globe {
+  color: #2c98f0
+}
+#colorlib-footer ul li a:after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  bottom: 7px;
+  left: 0;
+  right: 0;
+  margin:0;
+  padding:0;
+  background-color: #2c98f0;
+  visibility: hidden;
 
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  -o-transform: scaleX(0);
+  transform: scaleX(0);
 
+  -webkit-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -ms-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
+  
+}
 
+#colorlib-footer ul li a:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+#colorlib-footer  ul li a:hover:after {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  -moz-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  -o-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+#colorlib-footer ul li .active a {
+  color: #fff;
+}
+
+#colorlib-footer ul li .active a:after {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  -moz-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  -o-transform: scaleX(1);
+  transform: scaleX(1);
+}
 
 
 
@@ -581,22 +632,22 @@ h1, h2, h3, h4, h5, h6 {
 
 /********footer nav latérale********/
 @media screen and (max-width: 768px) {
-  #colorlib-aside .colorlib-footer {
+  #colorlib-footer {
     position: relative;
     bottom: 0;
   }
 }
 
-#colorlib-aside .colorlib-footer span {
+#colorlib-footer span {
   display: block;
 }
 
-#colorlib-aside .colorlib-footer ul {
+#colorlib-footer ul {
   padding: 0;
   margin: 0;
 }
 
-#colorlib-aside .colorlib-footer ul li {
+#colorlib-footer ul li {
   margin: 0 0 10px 0;
   padding: 0;
   list-style: none;
@@ -605,7 +656,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 1px;
 }
 
-#colorlib-aside .colorlib-footer ul li a {
+#colorlib-footer ul li a {
   color: #fff;
   text-decoration: none;
   position: relative;
@@ -616,7 +667,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
 }
 
-#colorlib-aside .colorlib-footer ul li a:after {
+#colorlib-footer ul li a:after {
   content: "";
   position: absolute;
   height: 1px;
@@ -637,12 +688,12 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-#colorlib-aside .colorlib-footer ul li a:hover {
+#colorlib-footer ul li a:hover {
   text-decoration: none;
   color: black;
 }
 
-#colorlib-aside .colorlib-footer ul li a:hover:after {
+#colorlib-footer ul li a:hover:after {
   visibility: visible;
   -webkit-transform: scaleX(1);
   -moz-transform: scaleX(1);
@@ -651,11 +702,11 @@ h1, h2, h3, h4, h5, h6 {
   transform: scaleX(1);
 }
 
-#colorlib-aside .colorlib-footer ul li a:active a {
+#colorlib-footer ul li a:active a {
   color: #2c98f0;
 }
 
-#colorlib-aside .colorlib-footer ul li.active a:after {
+#colorlib-footer ul li.active a:after {
   visibility: visible;
   -webkit-transform: scaleX(1);
   -moz-transform: scaleX(1);
@@ -941,6 +992,7 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   .colorlib-experience, .colorlib-skills, .colorlib-education, .colorlib-blog, .colorlib-work, .colorlib-about, .colorlib-services, .colorlib-contact {
     padding-top: 5em;
     padding-bottom: 8em;
+    border:1px solid red;
   }
 }
 
@@ -1350,12 +1402,28 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
 .services.color-6 .icon:after {
   border-color: #4054b2 transparent transparent transparent;
 }
+/**************blog*******************/
+.colorlib-blog .desc{
+  border:1px solid #AAAAAA;
+  padding:0 10px;
+  margin-bottom:3em;
+  border-radius:15px;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  -ms-border-radius:15px;
+  -o-border-radius:15px;
+  min-height: 250px;
+}
 
+.colorlib-blog .icon-download4 {
+  color:#fff;
+}
 .blog-entry {
   width: 100%;
   float: left;
   background: #fff;
   margin-bottom: 3em;
+  border:1px solid red;
 }
 
 @media screen and (max-width: 768px) {
@@ -1384,6 +1452,7 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+  
 }
 
 .blog-entry .desc h3 {
@@ -1409,6 +1478,7 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 400;
+  
 }
 
 .blog-entry .desc span small i {
@@ -1420,6 +1490,7 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #000;
+  
 }
 
 .blog-entry:hover .blog-img img {
@@ -1908,9 +1979,7 @@ input[type=email] {
   color: #2c98f0;
 }
 
-.globe {
-  color: #2c98f0
-}
+
 
 .radio {
   display: inline;
