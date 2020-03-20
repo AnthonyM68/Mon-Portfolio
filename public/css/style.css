@@ -378,7 +378,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #colorlib-aside #colorlib-main-menu ul li a:hover {
   text-decoration: none;
-  color: #AAAAAA;
+  color: #000;
 }
 
 #colorlib-aside #colorlib-main-menu ul li a:hover:after {

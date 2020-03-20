@@ -9,14 +9,14 @@ export default class Sidebar extends Component {
           <div className="text-center">
             <div className="author-img thumbnail" style={{ backgroundImage: 'url(images/MA.PNG)' }} />
             <h1 id="colorlib-logo">
-              <a href="https://www.linkedin.com/in/anthony-montmirail/">Anthony Montmirail</a></h1>
+              <a href="https://www.linkedin.com/in/anthony-montmirail/" >Anthony Montmirail</a></h1>
           </div>
           <nav id="colorlib-main-menu" role="navigation" className="navbar">
             <div id="navbar" className="collapse">
               <ul>
                 <li>
                   <i className="icon-mail"></i>
-                  <a href="#contact" data-nav-section="contact" className="text-mail"> montmirail.a@codeur.online</a>
+                  <a href="#contact" data-nav-section="contact" className="text-mail" data-nav-section="contact"> montmirail.a@codeur.online</a>
                 </li>
                 <li className="active"><a href="#home" data-nav-section="home">Introduction</a></li>
                 <li><a href="#about" data-nav-section="about">Description</a></li>

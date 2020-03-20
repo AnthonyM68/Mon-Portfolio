@@ -5,11 +5,15 @@ import WAVES from 'vanta/dist/vanta.waves.min'
 import GLOBE from 'vanta/dist/vanta.globe.min'
 import CELLS from 'vanta/dist/vanta.cells.min'
 import RINGS from 'vanta/dist/vanta.rings.min'
-import NET   from 'vanta/dist/vanta.net.min'
+import NET from 'vanta/dist/vanta.net.min'
 import RIPPLE from 'vanta/dist/vanta.ripple.min'
 
 
-
+document.onclick = function (event) { 
+  if (document.fullscreenElement) { 
+    document.exitFullscreen() 
+  } 
+};
 export default class Introduction extends React.Component {
   constructor() {
     super();
@@ -33,7 +37,15 @@ export default class Introduction extends React.Component {
     this.componentDidMount()
 
   }
-  
+  handleClick = (e) => {
+    let element = document.getElementById('vanta');
+    if(element.requestFullscreen){
+      element.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
   componentDidMount() {
     if (this.state.selectedOption === 'waves') {
       this.animate = WAVES({
@@ -48,7 +60,7 @@ export default class Introduction extends React.Component {
         color2: 0x4a1d2d,
         waveHeight: 25.50,//Heuteur de vagues
         waveSpeed: 1.20,//Vitessse
-        shininess:34.00,//Brillance
+        shininess: 34.00,//Brillance
         THREE: THREE
       });
     } else if (this.state.selectedOption === 'globe') {
@@ -69,66 +81,66 @@ export default class Introduction extends React.Component {
     else if (this.state.selectedOption === 'cells') {
       this.animate = CELLS({
         el: this.vantaRef.current,
-        mouseControls: true, 
-        touchControls: true, 
-        minHeight: 200.00, 
-        minWidth: 200.00, 
-        scale: 1.00, 
-        color1: 0x424143, 
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        color1: 0x424143,
         color2: 0xfffdfd,
-        size:3,//Taille
-        speed:2,//Vitesse
+        size: 3,//Taille
+        speed: 2,//Vitesse
         THREE: THREE
       });
-    } 
+    }
     else if (this.state.selectedOption === 'rings') {
       this.animate = RINGS({
         el: this.vantaRef.current,
-        mouseControls: true, 
-        touchControls: true, 
+        mouseControls: true,
+        touchControls: true,
         minHeight: 200.00,
-         minWidth: 200.00, 
-         scale: 1.00, 
-         scaleMobile: 1.00,
-         backgroundColor: 0x424143, 
-         color: 0x93fa1e,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        backgroundColor: 0x424143,
+        color: 0x93fa1e,
         THREE: THREE
       });
-    } 
+    }
     else if (this.state.selectedOption === 'net') {
       this.animate = NET({
         el: this.vantaRef.current,
-        mouseControls: true, 
-        touchControls: true, 
-        minHeight: 200.00, 
-        minWidth: 200.00, 
-        scale: 1.00, 
-        scaleMobile: 1.00, 
-        color: 0xfc397c, 
-        backgroundColor: 0x424143, 
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xfc397c,
+        backgroundColor: 0x424143,
         points: 11.00,
-        maxDistance: 22.00, 
+        maxDistance: 22.00,
         espacement: 16.00,
         THREE: THREE
       });
-    } 
+    }
     else if (this.state.selectedOption === 'ripple') {
       this.animate = RIPPLE({
         el: this.vantaRef.current,
-        mouseControls: true, 
-        touchControls: true, 
-        minHeight: 200.00, 
-        minWidth: 200.00, 
-        scale: 1.00, 
-        scaleMobile: 1.00, 
-        color: 0xfc397c, 
-        backgroundColor: 0x424143, 
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xfc397c,
+        backgroundColor: 0x424143,
         points: 11.00,
-        maxDistance: 22.00, 
+        maxDistance: 22.00,
         espacement: 16.00,
         THREE: THREE
       });
-    } 
+    }
     this.vantaEffect = this.animate;
   }
   componentWillUnmount() {
@@ -138,7 +150,13 @@ export default class Introduction extends React.Component {
     return <div>
       <section id="colorlib-hero" data-section="home">
         <div className="flexslider">
-          <div className='vanta' ref={this.vantaRef}>
+
+          <div id="vanta" className='vanta' ref={this.vantaRef}>
+
+
+
+
+
             <ul className="slides">
               <li>
                 <div className="overlay" />
@@ -172,31 +190,31 @@ export default class Introduction extends React.Component {
               </li>
             </ul>
           </div>
-         
-        </div>
-      <div className="row" id="select-background">
 
-        <div id="selector" className="row text-right">
-          <form id="myform" onSubmit={this.handleFormSubmit}>
-            <div className="radio">
-              <label>
-                <input type="radio" value="globe" checked={this.state.selectedOption === 'globe'} onChange={this.handleOptionChange} />
+        </div>
+        <div className="row" id="select-background">
+
+          <div id="selector" className="row text-right">
+            <form id="myform" onSubmit={this.handleFormSubmit}>
+              <div className="radio">
+                <label>
+                  <input type="radio" value="globe" checked={this.state.selectedOption === 'globe'} onChange={this.handleOptionChange} />
                 Globe
                 </label>
-            </div>
-            <div className="radio">
-              <label>
-                <input type="radio" value="waves" checked={this.state.selectedOption === 'waves'} onChange={this.handleOptionChange} />
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" value="waves" checked={this.state.selectedOption === 'waves'} onChange={this.handleOptionChange} />
                 Waves
                 </label>
-            </div>
-            <div className="radio">
+              </div>
+              <div className="radio">
                 <label>
                   <input type="radio" value="cells" checked={this.state.selectedOption === 'cells'} onChange={this.handleOptionChange} />
                   Cells
             </label>
-            </div>
-            <div className="radio">
+              </div>
+              <div className="radio">
                 <label>
                   <input type="radio" value="rings" checked={this.state.selectedOption === 'rings'} onChange={this.handleOptionChange} />
                   Rings
@@ -207,17 +225,18 @@ export default class Introduction extends React.Component {
                   <input type="radio" value="net" checked={this.state.selectedOption === 'net'} onChange={this.handleOptionChange} />
                   Net
             </label>
-            </div>
+              </div>
               <div className="radio">
                 <label>
                   <input type="radio" value="ripple" checked={this.state.selectedOption === 'ripple'} onChange={this.handleOptionChange} />
                   Ripple
             </label>
-            </div>
-            <button className="btn submit-background" type="submit">Démarrer</button>
-          </form>
+              </div>
+              <button className="btn submit-background" type="submit">Démarrer</button>
+              <a href="#" onClick={this.handleClick}>Ouvrir/Fermer l'image en mode « Plein écran </a><br />
+            </form>
+          </div>
         </div>
-        </div>   
       </section>
     </div>
   }
