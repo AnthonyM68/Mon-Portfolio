@@ -140,7 +140,7 @@ export default class Introduction extends React.Component {
         <div className="flexslider">
           <div className='vanta' ref={this.vantaRef}>
             <ul className="slides">
-              <li >
+              <li>
                 <div className="overlay" />
                 <div className="container-fluid">
                   <div className="row row-slider" id="row-slider">
@@ -172,8 +172,10 @@ export default class Introduction extends React.Component {
               </li>
             </ul>
           </div>
-          <div className="row" id="select-background">
+         
         </div>
+      <div className="row" id="select-background">
+
         <div id="selector" className="row text-right">
           <form id="myform" onSubmit={this.handleFormSubmit}>
             <div className="radio">
