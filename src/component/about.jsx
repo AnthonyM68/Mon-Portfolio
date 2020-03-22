@@ -103,7 +103,6 @@ export default class About extends Component {
                             <div className="col-md-12 text-center">
                                 <div id="alerte1" className={`${this.state.warning}`}><strong>{this.state.alert}</strong></div>
                             </div>
-                            
                             <div className="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
                                 <div className="col-md-12">
                                     <div className="about-desc"></div>
@@ -111,8 +110,6 @@ export default class About extends Component {
                                 </div>
                             </div>
                         </div>
-                   
-                
                         <div className="row">
                             <div className="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
                                 {item[1]}

@@ -149,6 +149,7 @@ export default class Introduction extends Component {
     return <div>
       <section id="colorlib-hero" data-section="home">
         <div className="flexslider">
+        
           <ul className="slides">
             <li>
               <div className="overlay" />
@@ -181,10 +182,16 @@ export default class Introduction extends Component {
               </div>
             </li>
           </ul>
+          
+          <div id='vanta' className='vanta' ref={this.vantaRef}><i className="icon-arrow-down-outline" /></div>
+          
         </div>
-        <div id='vanta' className='vanta' ref={this.vantaRef}></div>
+        
+       
         <div className="row" id="select-background">
+        
           <div id="selector" className="row text-right">
+            
             <form id="myform" onSubmit={this.handleFormSubmit}>
               <div className="radio">
                 <label>
@@ -223,9 +230,14 @@ export default class Introduction extends Component {
             </label>
               </div>
               <button className="btn submit-background" type="submit">Démarrer</button>
-              <a href="#" onClick={this.handleClick}>Ouvrirl'image en mode « Plein écran </a><br />
+              
             </form>
+
           </div>
+          <div className="row text-right">
+            <a href="#" onClick={this.handleClick} className="plein-ecran" >Ouvrir l'image en mode Plein écran </a><br />
+          </div>
+          
         </div>
       </section>
     </div>

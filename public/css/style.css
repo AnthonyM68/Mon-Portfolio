@@ -973,7 +973,6 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   .colorlib-experience, .colorlib-skills, .colorlib-education, .colorlib-blog, .colorlib-work, .colorlib-about, .colorlib-services, .colorlib-contact {
     padding-top: 5em;
     padding-bottom: 8em;
-    border:1px solid red;
   }
 }
 
@@ -991,6 +990,7 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   text-transform: uppercase;
   letter-spacing: 5px;
   line-height: 1.8;
+  color:#fff;
 }
 
 .colorlib-heading span {
@@ -1028,18 +1028,12 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   margin-bottom: 30px;
 }
 
-.about-desc h3 {
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-weight: 500;
-}
-
 .about-desc {
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 5px;
   font-weight: 600;
+  color:#fff;
 }
 
 .heading-blog {
@@ -1404,7 +1398,6 @@ body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
   float: left;
   background: #fff;
   margin-bottom: 3em;
-  border:1px solid red;
 }
 
 @media screen and (max-width: 768px) {
@@ -2003,41 +1996,72 @@ input[type=email] {
   font-size: 13px;
   font-family: "Quicksand", Arial, sans-serif;
   z-index:999;
+  margin-right:35px;
+}
+
+.plein-ecran{
+  margin-right:35px;
 }
 
 @media screen and (max-width: 768px) {
   #selector {
     text-align: center;
-    margin:0 auto;
-    padding:a auto;
+    margin-right:35px;
   }
   .submit-background{
     font-size:10px;
   }
-
 }
+
 #select-background{
   background-color:#424143;
-  
 }
 .row-slider {
   margin-left: -35px;
   margin-right: -35px;
 }
-
-.testtest{
-  /*position:absolute;
-  animation: move 3s;
-  -webkit-animation: move 3s;*/
-  border:1px solid red;
+.icon-arrow-down-outline{
+  position:absolute;
+  bottom:0;
+  right:350px;
+  margin-bottom:30px;
+  z-index:1;
+  color:#fff;
+  font-size:35px;
+  animation: move 2s infinite;
+  -webkit-animation: move 2s infinite;
 }
-/*
-@keyframes move{
+@keyframes move {
+  0%{
+    opacity:0;
+  }
+  12.5%{
+    opacity:0.25;
+  }
+  25%{
+    opacity:0.50;
+  }
+  37.5%{
+    opacity:0.75;
+  }
   50%{
-    margin-left:50vw
+    opacity:1;
   }
-
+  62.5%{
+    opacity:0.75;
+  }
+  75%{
+    opacity:0.50;
+  }
+  87.5%{
+    opacity:0.25;
+  }
   100%{
-    margin-left:100vw
+    opacity:0;
   }
-}*/
+}
+@media screen and (max-width: 768px) {
+  .icon-arrow-down-outline{
+    right:50px;
+  }
+}
