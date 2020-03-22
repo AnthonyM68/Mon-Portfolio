@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { SketchPicker } from 'react-color'
 import * as THREE from 'vanta/vendor/three.r95.min.js'
 
 import WAVES from 'vanta/dist/vanta.waves.min'
@@ -8,17 +9,21 @@ import RINGS from 'vanta/dist/vanta.rings.min'
 import NET from 'vanta/dist/vanta.net.min'
 import RIPPLE from 'vanta/dist/vanta.ripple.min'
 
+
 export default class Introduction extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedOption: 'globe',
+      sketch: 'hidden',
+
     }
     this.vantaRef = React.createRef();
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleColor = this.handleColor.bind(this);
   }
 
   handleOptionChange(changeEvent) {
@@ -128,6 +133,7 @@ export default class Introduction extends Component {
       });
     }
     this.vantaEffect = this.animate;
+    window.addEventListener('load', this.handleLoad);
   }
 
   handleClick() {
@@ -135,6 +141,17 @@ export default class Introduction extends Component {
     if (element.requestFullscreen) {
       element.requestFullscreen();
     }
+  }
+  handleColor() {
+    this.setState(state => {
+      return {
+        sketch: state.sketch = 'visible',
+      };
+    });
+
+
+
+
   }
 
   componentWillUnmount() {
@@ -146,10 +163,15 @@ export default class Introduction extends Component {
         document.exitFullscreen();
       }
     }
+
+
+
+
     return <div>
+
       <section id="colorlib-hero" data-section="home">
         <div className="flexslider">
-        
+
           <ul className="slides">
             <li>
               <div className="overlay" />
@@ -170,7 +192,7 @@ export default class Introduction extends Component {
               <div className="overlay" />
               <div className="container-fluid">
                 <div className="row row-slider">
-                  <div className="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12  slider-text">
+                  <div className="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 slider-text">
                     <div className="slider-text-inner">
                       <div className="desc">
                         <h1>Mes projets<br />de Développements</h1>
@@ -182,16 +204,20 @@ export default class Introduction extends Component {
               </div>
             </li>
           </ul>
-          
+
           <div id='vanta' className='vanta' ref={this.vantaRef}><i className="icon-arrow-down-outline" /></div>
-          
+          <div className="sketch">
+            <div><SketchPicker /></div>
+          </div>
         </div>
-        
-       
+
+
         <div className="row" id="select-background">
-        
+
+
+
           <div id="selector" className="row text-right">
-            
+
             <form id="myform" onSubmit={this.handleFormSubmit}>
               <div className="radio">
                 <label>
@@ -230,14 +256,15 @@ export default class Introduction extends Component {
             </label>
               </div>
               <button className="btn submit-background" type="submit">Démarrer</button>
-              
+
             </form>
 
           </div>
           <div className="row text-right">
             <a href="#" onClick={this.handleClick} className="plein-ecran" >Ouvrir l'image en mode Plein écran </a><br />
+            <a href="#" onClick={this.handleColor} className="plein-ecran" >Sélecteur de couleur </a><br />
           </div>
-          
+
         </div>
       </section>
     </div>
