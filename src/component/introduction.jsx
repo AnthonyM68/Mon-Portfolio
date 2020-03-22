@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import * as THREE from 'vanta/vendor/three.r95.min.js'
 
 import WAVES from 'vanta/dist/vanta.waves.min'
@@ -8,24 +8,19 @@ import RINGS from 'vanta/dist/vanta.rings.min'
 import NET from 'vanta/dist/vanta.net.min'
 import RIPPLE from 'vanta/dist/vanta.ripple.min'
 
-
-document.onclick = function (event) { 
-  if (document.fullscreenElement) { 
-    document.exitFullscreen() 
-  } 
-};
-export default class Introduction extends React.Component {
-  constructor() {
-    super();
-    this.vantaRef = React.createRef();
+export default class Introduction extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      selectedOption: 'globe'
+      selectedOption: 'globe',
     }
+    this.vantaRef = React.createRef();
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-
+    this.handleClick = this.handleClick.bind(this);
   }
+
   handleOptionChange(changeEvent) {
     this.setState({
       selectedOption: changeEvent.target.value
@@ -34,16 +29,7 @@ export default class Introduction extends React.Component {
 
   handleFormSubmit(formSubmitEvent) {
     formSubmitEvent.preventDefault();
-    this.componentDidMount()
-
-  }
-  handleClick = (e) => {
-    let element = document.getElementById('vanta');
-    if(element.requestFullscreen){
-      element.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
+    this.componentDidMount();
   }
 
   componentDidMount() {
@@ -143,57 +129,61 @@ export default class Introduction extends React.Component {
     }
     this.vantaEffect = this.animate;
   }
+
+  handleClick() {
+    let element = document.getElementById('vanta');
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    }
+  }
+
   componentWillUnmount() {
     if (this.vantaEffect) this.vantaEffect.destroy()
   }
   render() {
+    document.onclick = function (event) {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    }
     return <div>
       <section id="colorlib-hero" data-section="home">
         <div className="flexslider">
-
-          <div id="vanta" className='vanta' ref={this.vantaRef}>
-
-
-
-
-
-            <ul className="slides">
-              <li>
-                <div className="overlay" />
-                <div className="container-fluid">
-                  <div className="row row-slider" id="row-slider">
-                    <div className="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 slider-text">
-                      <div className="slider-text-inner">
-                        <div className="desc">
-                          <h1>Bonjour je suis  <br />Anthony</h1>
-                          <p><a className="btn btn-primary btn-learn" href="images/cv/cv.pdf" target="_blank" rel="noopener noreferrer">Mon CV <i className="icon-download4" /></a></p>
-                        </div>
+          <ul className="slides">
+            <li>
+              <div className="overlay" />
+              <div className="container-fluid">
+                <div className="row row-slider" id="row-slider">
+                  <div className="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 slider-text">
+                    <div className="slider-text-inner">
+                      <div className="desc">
+                        <h1>Bonjour je suis  <br />Anthony</h1>
+                        <p><a className="btn btn-primary btn-learn" href="images/cv/cv.pdf" target="_blank" rel="noopener noreferrer">Mon CV <i className="icon-download4" /></a></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </li>
-              <li>
-                <div className="overlay" />
-                <div className="container-fluid">
-                  <div className="row row-slider">
-                    <div className="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12  slider-text">
-                      <div className="slider-text-inner">
-                        <div className="desc">
-                          <h1>Mes projets<br />de Développements</h1>
-                          <p><a className="btn btn-primary btn-learn" href="https://github.com/AnthonyM68" target="_blank" rel="noopener noreferrer">Voir projets <i className="icon-github" /></a></p>
-                        </div>
+              </div>
+            </li>
+            <li>
+              <div className="overlay" />
+              <div className="container-fluid">
+                <div className="row row-slider">
+                  <div className="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12  slider-text">
+                    <div className="slider-text-inner">
+                      <div className="desc">
+                        <h1>Mes projets<br />de Développements</h1>
+                        <p><a className="btn btn-primary btn-learn" href="https://github.com/AnthonyM68" target="_blank" rel="noopener noreferrer">Voir projets <i className="icon-github" /></a></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </li>
-            </ul>
-          </div>
-
+              </div>
+            </li>
+          </ul>
         </div>
+        <div id='vanta' className='vanta' ref={this.vantaRef}></div>
         <div className="row" id="select-background">
-
           <div id="selector" className="row text-right">
             <form id="myform" onSubmit={this.handleFormSubmit}>
               <div className="radio">
@@ -233,7 +223,7 @@ export default class Introduction extends React.Component {
             </label>
               </div>
               <button className="btn submit-background" type="submit">Démarrer</button>
-              <a href="#" onClick={this.handleClick}>Ouvrir/Fermer l'image en mode « Plein écran </a><br />
+              <a href="#" onClick={this.handleClick}>Ouvrirl'image en mode « Plein écran </a><br />
             </form>
           </div>
         </div>

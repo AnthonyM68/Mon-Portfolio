@@ -2024,3 +2024,20 @@ input[type=email] {
   margin-left: -35px;
   margin-right: -35px;
 }
+
+.testtest{
+  /*position:absolute;
+  animation: move 3s;
+  -webkit-animation: move 3s;*/
+  border:1px solid red;
+}
+/*
+@keyframes move{
+  50%{
+    margin-left:50vw
+  }
+
+  100%{
+    margin-left:100vw
+  }
+}*/
