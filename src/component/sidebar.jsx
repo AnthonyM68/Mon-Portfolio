@@ -16,7 +16,7 @@ export default class Sidebar extends Component {
               <ul>
                 <li>
                   <i className="icon-mail"></i>
-                  <a href="#contact" data-nav-section="contact" className="text-mail" data-nav-section="contact"> montmirail.a@codeur.online</a>
+                  <a href="#contact" data-nav-section="contact" className="text-mail" data-nav-section="contact"> contact@logic-68consolessystem.fr</a>
                 </li>
                 <li className="active"><a href="#home" data-nav-section="home">Introduction</a></li>
                 <li><a href="#about" data-nav-section="about">Description</a></li>

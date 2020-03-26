@@ -37,8 +37,8 @@ export default class About extends Component {
         let element = document.getElementById('alerte1');
         axios({
             method: "POST",
-            url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
-            //url: "http://localhost/MonPortfolio/public/php/about.php",
+            //url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/about.php",
+            url: "http://localhost/monportfolio/public/php/about.php",
             data: this.state,
             headers: {
                 'Content-Type': 'application/json'

@@ -1998,7 +1998,15 @@ input[type=email] {
   z-index:999;
   margin-right:35px;
 }
-
+#selector2 {
+  color: #AAAAAA;
+  background-color:#424143;
+  width: 100%;
+  font-size: 13px;
+  font-family: "Quicksand", Arial, sans-serif;
+  z-index:999;
+  margin-right:60px;
+}
 .plein-ecran{
   margin-right:35px;
 }
@@ -2067,6 +2075,4 @@ input[type=email] {
 }
 .sketch{
   position:absolute;
-  bottom:10px;
-  right:80px;
 }

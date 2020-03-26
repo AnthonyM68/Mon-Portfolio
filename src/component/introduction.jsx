@@ -1,5 +1,8 @@
+'use strict'
 import React, { Component } from 'react'
+import reactCSS from 'reactcss'
 import { SketchPicker } from 'react-color'
+
 import * as THREE from 'vanta/vendor/three.r95.min.js'
 
 import WAVES from 'vanta/dist/vanta.waves.min'
@@ -15,28 +18,59 @@ export default class Introduction extends Component {
     super(props);
     this.state = {
       selectedOption: 'globe',
-      sketch: 'hidden',
-
+      selectedOptionColor: 'background',
+      background: '#424143',
+      color1: '#2c98f0',
+      color2: '#fffdfd',
+      displayColorPicker: false,
+      visibilityState: 'visible',
+      
+      color: {
+        r: '66',
+        g: '65',
+        b: '67',
+        a: '1',
+      },
     }
     this.vantaRef = React.createRef();
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.handleOptionChangeColor = this.handleOptionChangeColor.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleFormSubmitColor = this.handleFormSubmitColor.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleColor = this.handleColor.bind(this);
   }
-
   handleOptionChange(changeEvent) {
     this.setState({
       selectedOption: changeEvent.target.value
     });
   }
+  handleOptionChangeColor(changeEvent) {
+    this.setState({
+      selectedOptionColor: changeEvent.target.value
+    });
+  }
+  handleChange = (color) => {
+    console.log(this.state.selectedOptionColor)
+    this.setState({ color: color.rgb })
+    this.setState({ [this.state.selectedOptionColor]: color.hex })
+    this.componentDidMount()
+  }
 
+
+  handleClicks = () => {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  }
   handleFormSubmit(formSubmitEvent) {
     formSubmitEvent.preventDefault();
     this.componentDidMount();
-  }
 
+  }
+  handleFormSubmitColor(formSubmitEvent) {
+    formSubmitEvent.preventDefault();
+    this.componentDidMount();
+
+  }
   componentDidMount() {
     if (this.state.selectedOption === 'waves') {
       this.animate = WAVES({
@@ -47,8 +81,8 @@ export default class Introduction extends Component {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x424143,
-        color2: 0x4a1d2d,
+        color: this.state.color1,
+        color2: this.state.color2,
         waveHeight: 25.50,//Heuteur de vagues
         waveSpeed: 1.20,//Vitessse
         shininess: 34.00,//Brillance
@@ -63,9 +97,9 @@ export default class Introduction extends Component {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x4a1d2d,//Rouge
-        color2: 0xfffdfd,//Blanc
-        backgroundColor: 0x424143,//Gris
+        color: this.state.color1,
+        color2: this.state.color2,
+        backgroundColor: this.state.background,
         THREE: THREE
       });
     }
@@ -77,8 +111,8 @@ export default class Introduction extends Component {
         minHeight: 200.00,
         minWidth: 200.00,
         scale: 1.00,
-        color1: 0x424143,
-        color2: 0xfffdfd,
+        color1: this.state.color1,
+        color2: this.state.color2,
         size: 3,//Taille
         speed: 2,//Vitesse
         THREE: THREE
@@ -93,7 +127,7 @@ export default class Introduction extends Component {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        backgroundColor: 0x424143,
+        backgroundColor: this.state.background,
         color: 0x93fa1e,
         THREE: THREE
       });
@@ -107,8 +141,8 @@ export default class Introduction extends Component {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xfc397c,
-        backgroundColor: 0x424143,
+        color: this.state.color1,
+        backgroundColor: this.state.background,
         points: 11.00,
         maxDistance: 22.00,
         espacement: 16.00,
@@ -124,8 +158,8 @@ export default class Introduction extends Component {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0xfc397c,
-        backgroundColor: 0x424143,
+        color: this.state.color1,
+        backgroundColor: this.state.background,
         points: 11.00,
         maxDistance: 22.00,
         espacement: 16.00,
@@ -133,43 +167,69 @@ export default class Introduction extends Component {
       });
     }
     this.vantaEffect = this.animate;
-    window.addEventListener('load', this.handleLoad);
   }
+
 
   handleClick() {
     let element = document.getElementById('vanta');
+    this.setState({visibilityState: 'hidden'});
     if (element.requestFullscreen) {
       element.requestFullscreen();
+      
     }
   }
-  handleColor() {
-    this.setState(state => {
-      return {
-        sketch: state.sketch = 'visible',
-      };
-    });
-
-
-
-
-  }
+  handleClose = () => {
+    this.setState({ displayColorPicker: false })
+  };
 
   componentWillUnmount() {
     if (this.vantaEffect) this.vantaEffect.destroy()
   }
+
+
   render() {
-    document.onclick = function (event) {
+    const styles = reactCSS({
+      'default': {
+        color: {
+          width: '36px',
+          height: '14px',
+          borderRadius: '2px',
+          background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${this.state.color.b}, ${this.state.color.a})`,
+        },
+        swatch: {
+          padding: '5px',
+          background: '#fff',
+          borderRadius: '1px',
+          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+          display: 'inline-block',
+          cursor: 'pointer',
+        },
+        popover: {
+          position: 'absolute',
+          zIndex: '2',
+          right: '5vw',
+        },
+        cover: {
+          position: 'fixed',
+          top: '0px',
+          right: '0px',
+          bottom: '0px',
+          left: '0px',
+
+        },
+      },
+    });
+
+    document.onclick = () => {
       if (document.fullscreenElement) {
         document.exitFullscreen();
+        this.setState({visibilityState: 'visible'});
       }
     }
-
-
-
-
     return <div>
-
       <section id="colorlib-hero" data-section="home">
+
+
         <div className="flexslider">
 
           <ul className="slides">
@@ -203,22 +263,14 @@ export default class Introduction extends Component {
                 </div>
               </div>
             </li>
-          </ul>
-
-          <div id='vanta' className='vanta' ref={this.vantaRef}><i className="icon-arrow-down-outline" /></div>
-          <div className="sketch">
-            <div><SketchPicker /></div>
-          </div>
+          </ul> <div id='vanta' className='vanta' ref={this.vantaRef}><i className="icon-arrow-down-outline" style={{visibility: this.state.visibilityState}}/></div>
         </div>
 
-
         <div className="row" id="select-background">
-
-
-
           <div id="selector" className="row text-right">
-
+           
             <form id="myform" onSubmit={this.handleFormSubmit}>
+
               <div className="radio">
                 <label>
                   <input type="radio" value="globe" checked={this.state.selectedOption === 'globe'} onChange={this.handleOptionChange} />
@@ -256,17 +308,52 @@ export default class Introduction extends Component {
             </label>
               </div>
               <button className="btn submit-background" type="submit">Démarrer</button>
-
             </form>
+          </div>
 
+
+
+          <div id="selector2" className="row text-right">
+
+            <form id="myform2" onSubmit={this.handleFormSubmitColor}>
+
+              <div className="radio">
+                <label>
+                  <input type="radio" value="background" checked={this.state.selectedOptionColor === 'background'} onChange={this.handleOptionChangeColor} />
+                Background
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" value="color1" checked={this.state.selectedOptionColor === 'color1'} onChange={this.handleOptionChangeColor} />
+                Color1
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" value="color2" checked={this.state.selectedOptionColor === 'color2'} onChange={this.handleOptionChangeColor} />
+                  Color2
+              </label>
+              </div>
+              <div style={styles.swatch} onClick={this.handleClicks}>
+                <div style={styles.color} />
+              </div>
+              {this.state.displayColorPicker ? <div style={styles.popover}>
+                <div style={styles.cover} onClick={this.handleClose} />
+                <div><SketchPicker color={this.state.color} onChange={this.handleChange} /></div>
+
+              </div> : null}
+              <br /><a href="#" onClick={this.handleClick} className="plein-ecran" >Ouvrir l'image en mode Plein écran </a>
+            </form>
           </div>
-          <div className="row text-right">
-            <a href="#" onClick={this.handleClick} className="plein-ecran" >Ouvrir l'image en mode Plein écran </a><br />
-            <a href="#" onClick={this.handleColor} className="plein-ecran" >Sélecteur de couleur </a><br />
-          </div>
+
+
 
         </div>
+
+
       </section>
+
     </div>
   }
 }

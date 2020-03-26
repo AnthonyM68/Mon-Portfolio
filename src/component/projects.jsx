@@ -65,8 +65,8 @@ export default class Projects extends Component {
 		//console.log(this.state)
 		axios({
 			method: "POST",
-			url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
-			//url: "http://localhost/MonPortfolio/public/php/project.php",
+			//url: "https://anthonym.promo-36.codeur.online/MonPortfolio/php/project.php",
+			url: "http://localhost/MonPortfolio/public/php/project.php",
 			data: this.state,
 			headers: {
 				'Content-Type': 'application/json'
